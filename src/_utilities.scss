@@ -1,0 +1,653 @@
+// ------------------------------------------------------------
+// Utilities
+// ------------------------------------------------------------
+@use "config" as *;
+
+// Text
+@if $enable-texts {
+  @each $name, $value in $font-sizes {
+    .fs-#{$name} {
+      font-size: var(--fs-#{$name});
+    }
+  }
+
+  @each $name, $value in $line-heights {
+    .#{$name} {
+      line-height: var(--#{$name});
+    }
+  }
+
+  @each $name, $value in $font-weights {
+    .fw-#{$name} {
+      font-weight: #{$value};
+    }
+  }
+
+  @each $name, $prop, $value in $text-align-wrap {
+    .#{$name}, .#{$name} * {
+      #{$prop}: #{$value};
+    }
+  }
+}
+
+// Borders
+@if $enable-borders {
+  @each $name, $prop in $border-props { 
+    .#{$name}-none {
+      #{$prop}: none;        
+    }
+  }
+  
+  @each $name, $prop in $border-props {
+    .#{$name} {
+      #{$prop}: $border-values;        
+    }
+  }
+}
+
+// Radius
+@if $enable-radius {
+  .rd {
+    border-radius: var(--rd);
+  }
+  
+  @each $name, $value in $border-radius-values {
+    .#{$name} {
+      border-radius: #{$value};
+    }
+  }
+  
+  @each $name, $value in $border-radius-single-values {
+    .#{$name} {
+      border-radius: #{$value};
+    }
+  }
+  
+  @each $name, $value in $border-radius-values {
+    @each $class, $start, $end in $radius-props {
+      .#{$name}-#{$class} {
+        #{$start}: #{$value};
+        #{$end}: #{$value};
+      }
+    }
+  }
+}
+
+// Inner radius
+@if $enable-inner-radius {
+  @each $name, $value in $border-radius-inner-values {
+    .#{$name}-inner {
+      border-radius: calc(#{$value} - #{$radius-sub-width});
+    }
+  }
+
+  @each $name, $value in $border-radius-inner-values {
+    @each $class, $start, $end in $radius-props {
+      .#{$name}-#{$class}-inner {
+        #{$start}: calc(#{$value} - #{$radius-sub-width});
+        #{$end}: calc(#{$value} - #{$radius-sub-width});
+      }
+    }
+  }
+}
+
+// ------------------------------------------------------------
+// Surface color utilities
+// ------------------------------------------------------------
+@if $enable-surface-backgrounds {
+  @each $name, $color in $surface-colors {
+    .bg-#{$name}, .bg-#{$name}-active:is(:hover, :focus, :focus-within) {
+      color: var(--fg, contrast-color(var(--#{$name})));
+      background-color: var(--#{$name});
+    }
+  }
+}
+
+@if $enable-surface-borders {
+  @each $name, $color in $surface-colors {
+    .bd-#{$name}, .bd-#{$name}-active:is(:hover, :focus, :focus-within) {
+      border-color: var(--#{$name});
+    }
+  }
+}
+
+@if $enable-surface-outlines {
+  @each $name, $color in $surface-colors {
+    .outline-#{$name}, .outline-#{$name} * {
+      outline-color: var(--#{$name});
+    } 
+  }
+}
+
+// ------------------------------------------------------------
+// Primary color utilities
+// ------------------------------------------------------------
+@if $enable-color-backgrounds {
+  @each $name, $token in $color-tokens {
+    .bg-#{$name}, .bg-#{$name}-active:is(:hover, :focus, :focus-within) {
+      color: var(--fg, contrast-color(var(--#{$name})));
+      background-color: var(--#{$name});
+    }    
+    
+    @for $value from 1 through $color-utilities { 
+      .bg-#{$name}-#{$value}, .bg-#{$name}-#{$value}-active:is(:hover, :focus, :focus-within) {
+        color: var(--fg, contrast-color(var(--#{$name}-#{$value})));
+        background-color: var(--#{$name}-#{$value});
+      }    
+    }
+  }
+}
+
+@if $enable-color-borders {
+  @each $name, $token in $color-tokens {
+    .bd-#{$name}, .bd-#{$name}-active:is(:hover, :focus, :focus-within) {
+      border-color: var(--#{$name});
+    } 
+    
+    @for $value from 1 through $color-utilities { 
+      .bd-#{$name}-#{$value}, .bd-#{$name}-#{$value}-active:is(:hover, :focus, :focus-within) {
+        border-color: var(--#{$name}-#{$value});
+      }    
+    }
+  }
+}
+
+@if $enable-color-outlines {
+  @each $name, $token in $color-tokens {
+    .outline-#{$name}, .outline-#{$name} * {
+      outline-color: var(--#{$name});
+    } 
+    
+    @for $value from 1 through $color-utilities { 
+      .outline-#{$name}-#{$value}, .outline-#{$name}-#{$value} * {
+        outline-color: var(--#{$name}-#{$value});
+      }    
+    }
+  }
+}
+
+@if $enable-color-texts {
+  @each $name, $token in $color-tokens {
+    .fg-#{$name}, .fg-#{$name}-active:is(:hover, :focus, :focus-within) {
+      color: var(--#{$name});
+    }    
+    
+    @for $value from 1 through $color-utilities { 
+      .fg-#{$name}-#{$value}, .fg-#{$name}-#{$value}-active:is(:hover, :focus, :focus-within) {
+        color: var(--#{$name}-#{$value});
+      }    
+    }
+  }
+}
+
+// ------------------------------------------------------------
+// Primary color modifiers
+// ------------------------------------------------------------
+@if $enable-color-forms {
+  @each $name, $background, $null, $border in $color-modifiers {
+    .form-#{$name} {
+      --form-bg: #{$background};
+      --form-bd-color: #{$border};
+    }
+  }
+}
+
+@if $enable-color-buttons {
+  @each $name, $background, $hover, $border in $color-modifiers {
+    .btn-#{$name} {
+      --btn-bg: #{$background};
+      --btn-bg-hover: #{$hover};
+      --btn-bd-color: #{$border};
+    }
+  }
+}
+
+@if $enable-color-tables {
+  @each $name, $background, $thead, $border in $color-tables {
+    .table-#{$name} {
+      --table-bg: #{$background};
+      --thead-bg: #{$thead};
+      --table-bd-color: #{$border};
+    }
+  }
+}
+
+// ----------------------------------------------------------
+// Icon utilities
+// ----------------------------------------------------------
+@if $enable-icon-utilities {
+  :is(.#{$icon-prefix}, .#{$icon-prefix}-b, .#{$icon-prefix}-block, .#{$icon-prefix}-block-center):before, .#{$icon-prefix}-a:after {
+    @include icon-mask;
+  }
+  
+  %icon-mask {
+    @include icon-mask;
+  }
+  
+  .#{$icon-prefix}-b:before {
+    margin-inline-end: var(--#{$icon-prefix}-me, 0.25em);
+  }
+  
+  .#{$icon-prefix}-a:after {
+    margin-inline-start: var(--#{$icon-prefix}-ms, 0.25em);
+  }
+  
+  .#{$icon-prefix}-block:before, .#{$icon-prefix}-block-center:before {
+    --#{$icon-prefix}-va: initial;
+    display: block;
+    margin-block-end: var(--#{$icon-prefix}-mb);
+  }
+  
+  .#{$icon-prefix}-block-center:before {
+    margin-inline: auto;
+  }
+}
+
+// ----------------------------------------------------------
+// Icon classes
+// ----------------------------------------------------------
+@if $enable-custom-icon-classes {
+  @each $name, $value in $custom-icons {
+    @if $enable-custom-icon-tokens {
+      .#{$icon-prefix}-#{$name} {
+        --svg: var(--#{$icon-prefix}-#{$name});
+      }
+    }
+    @else {
+      .#{$icon-prefix}-#{$name} {
+        --svg: #{$value};
+      }
+    }
+  }
+}
+
+@if $enable-default-icon-classes {
+  @each $name, $value in $standard-icons {
+    @if $enable-default-icon-tokens {
+      .#{$icon-prefix}-#{$name} {
+        --svg: var(--#{$icon-prefix}-#{$name});
+      }
+    }
+    @else {
+      .#{$icon-prefix}-#{$name} {
+        --svg: #{$value};
+      }
+    }
+  }
+  
+  @each $name, $value in $scheme-icons {
+    @if $enable-default-icon-tokens {
+      .#{$icon-prefix}-#{$name} {
+        --svg: var(--#{$icon-prefix}-#{$name});
+      }
+    }
+    @else {
+      .#{$icon-prefix}-#{$name} {
+        --svg: #{$value};
+      }
+    }
+  }
+
+  @each $name, $value in $caret-icons {
+    @if $enable-default-icon-tokens {
+      .#{$icon-prefix}-#{$name} {
+        --svg: var(--#{$icon-prefix}-#{$name});
+      }
+    }
+    @else {
+      .#{$icon-prefix}-#{$name} {
+        --svg: #{$value};
+      }
+    }
+  }
+
+  @each $name, $value in $box-icons {
+    @if $enable-default-icon-tokens {
+      .#{$icon-prefix}-#{$name} {
+        --svg: var(--#{$icon-prefix}-#{$name});
+      }
+    }
+    @else {
+      .#{$icon-prefix}-#{$name} {
+        --svg: #{$value};
+      }
+    }
+  }
+
+  @each $name, $value in $circle-icons {
+    @if $enable-default-icon-tokens {
+      .#{$icon-prefix}-#{$name} {
+        --svg: var(--#{$icon-prefix}-#{$name});
+      }
+    }
+    @else {
+      .#{$icon-prefix}-#{$name} {
+        --svg: #{$value};
+      }
+    }
+  }
+
+  @each $name, $value in $brand-icons {
+    @if $enable-default-icon-tokens {
+      .#{$icon-prefix}-#{$name} {
+        --svg: var(--#{$icon-prefix}-#{$name});
+      }
+    }
+    @else {
+      .#{$icon-prefix}-#{$name} {
+        --svg: #{$value};
+      }
+    }
+  }
+}
+
+// ----------------------------------------------------------
+// Icon color modifiers - values from $icon-colors: () map
+// ----------------------------------------------------------
+@each $name, $value in $icon-colors {
+  .#{$icon-prefix}-#{$name} {
+    --#{$icon-prefix}: #{$value};
+  }
+}
+
+// ------------------------------------------------------------
+// Layouts
+// ------------------------------------------------------------
+
+// Containers
+@if $enable-containers {
+  .container,
+  [class*=container-] {
+    inline-size: 100%;
+    max-inline-size: var(--container);
+  }
+  
+  @each $name, $value in $container-sizes {
+    .container-#{$name} {
+      --container: #{$value};
+    }
+  }
+} // end-containers
+
+// Display
+@if $enable-display {
+  @each $name, $value in $display-values {
+    .#{$name} {
+      display: #{$value};
+    }
+  }
+} // end-display
+
+// Flex
+@if $enable-flex {
+  @each $name, $prop, $value in $flex-utility-values {
+    .#{$name} {
+      #{$prop}: #{$value};
+    }
+  }
+} // end-flex
+
+// Grids
+@if $enable-grid {
+  .grid-columns, .grid-autofit,
+    [class*=grid-columns-], [class*=grid-autofit-] {
+    --rows: repeat(var(--gtr, 1), minmax(0, 1fr));
+    display: grid;
+    grid-template-rows: var(--rows);
+  }
+  
+  @each $name, $prop, $value in $grid-utility-values {
+    .#{$name} {
+      #{$prop}: $value;
+    }
+  }
+  
+  @for $value from 1 through $grid-column-values {
+    .g-#{$value} {
+      --cols: #{$value};
+    }
+  }
+  
+  // Grid layouts
+  @if $enable-grid-layouts {
+    @each $class, $prop, $span in $grid-column-props {
+      @for $value from 1 through $grid-column-values {
+        .#{$class}-#{$value} {
+          #{$prop}: #{$span} $value;
+        }
+      }
+    }
+      
+    @each $class, $prop, $span in $grid-row-props {
+      @for $value from 1 through $grid-row-values {
+        .#{$class}-#{$value} {
+          #{$prop}: #{$span} $value;
+        }
+      }
+    }  
+  } // end-grid-layouts
+} // end-grid
+
+// Align
+@if $enable-align {
+  @each $name, $value in $content-items-values {
+    .align-items-#{$name} {
+      align-items: #{$value};
+    }
+  }
+  
+  @each $name, $value in $content-space-values {
+    .align-content-#{$name} {
+      align-content: #{$value};
+    }
+  }
+} // end-align
+
+// Justify
+@if $enable-justify {
+  @each $name, $value in $content-items-values {
+    .justify-items-#{$name} {
+      justify-items: #{$value};
+    }
+  }
+  
+  @each $name, $value in $content-space-values {
+    .justify-content-#{$name} {
+      justify-content: #{$value};
+    }
+  }
+} // end-justify
+
+// Place
+@if $enable-place {
+  @each $name, $value in $content-items-values {
+    .place-items-#{$name} {
+      place-items: #{$value};
+    }
+  }
+  
+  @each $name, $value in $content-space-values {
+    .place-content-#{$name} {
+      place-content: #{$value};
+    }
+  }
+} // end-place
+
+// Position
+@if $enable-position {
+  @each $name, $value in $position-values {
+    .position-#{$name} {
+      position: #{$value};
+    }
+  }
+} // end-position
+
+// Inset
+@if $enable-inset {
+  @each $name, $prop in $inset-values {
+    .#{$name} {
+      #{$prop}: var(--#{$name}, 0);
+    }
+  }
+
+  @each $name, $prop in $inset-values {
+    .#{$name}-revert {
+      #{$prop}: revert;
+    }
+  }
+} // end-inset
+
+// Z-index
+@if $enable-zindex {
+  @each $name, $value in $zindex-values {
+    .#{$name} {
+      z-index: #{$value};
+    }
+  }
+} // end-z-index
+
+// Order
+@if $enable-order {
+  @each $name, $value in $order-values {
+  .#{$name} {
+      order: #{$value};        
+    }
+  }
+} // end-order
+
+// Overflow
+@if $enable-overflow {
+  @each $name, $value in $overflow-values {
+    @each $class, $prop in $overflow-props {
+      .#{$class}-#{$name} {
+        #{$prop}: #{$value};
+      }
+    }
+  }
+} // end-overflow
+
+// Overscroll
+@if $enable-overscroll {
+  @each $name, $value in $overscroll-values {
+    .#{$name} {
+      overscroll-behavior: #{$value};
+    }
+  }
+} // end-overscroll
+
+// Scrollbars
+@if $enable-scrollbars {
+  @each $name, $value in $scrollbar-widths {
+    .#{$name} {
+      scrollbar-width: #{$value};
+    }
+  }
+  
+  @each $name, $value in $scrollbar-gutter {
+    .#{$name} {
+      scrollbar-gutter: #{$value};
+    }
+  }
+} // end-scrollbars
+
+// Columns
+@if $enable-columns {
+  .columns {
+    columns: var(--cols);
+  }
+
+  @for $value from 1 through $column-values {
+    .columns-#{$value} {
+      columns: $value;
+    }
+  }
+} // end-columns
+
+// Aspect-ratio
+@if $enable-aspect-ratio {
+  .ratio, .ratio-group *:not(figcaption) {
+    aspect-ratio: var(--ratio);
+  }
+
+  @each $name, $value in $aspect-ratio-values {
+    .ratio-#{$name}, .ratio-group-#{$name} *:not(figcaption) {
+      aspect-ratio: $value;     
+    }    
+  }
+} // end-aspect-ratio
+
+// Object-fit
+@if $enable-object-fit {  
+  @each $name, $value in $object-fit-values {
+    .object-fit-#{$name}, .object-fit-group-#{$name} * {
+      object-fit: $value;       
+    }
+  }
+} // end-object-fit
+
+// Gaps
+@if $enable-gaps {
+  @each $name, $value in $gap-values {
+    @each $class, $prop in $gap-props {
+      .#{$class}-#{$name} {
+        #{$prop}: #{$value};        
+      }
+    }
+  }  
+} // end-gaps
+
+// Margins
+@if $enable-margins {  
+  @each $name, $value in $margin-values {
+    @each $class, $prop in $margin-props {
+      .#{$class}-#{$name} {
+        #{$prop}: #{$value};        
+      }
+    }
+  }
+} // end-margins
+
+// Padding
+@if $enable-padding {  
+  @each $name, $value in $padding-values {
+    @each $class, $prop in $padding-props {
+      .#{$class}-#{$name} {
+        #{$prop}: #{$value};        
+      }
+    }
+  }
+} // end-padding
+
+// Heights
+@if $enable-heights {
+  @each $class, $prop in $height-props {
+    @each $name, $value in $height-values {
+      .#{$class}-#{$name} {
+        #{$prop}: #{$value};        
+      }
+    }
+  }
+  
+  @each $name, $prop, $value in $variable-heights {
+    .#{$name} {
+      #{$prop}: #{$value};
+    }
+  }
+} // end-heights
+
+// Widths
+@if $enable-widths {
+  @each $class, $prop in $width-props {
+    @each $name, $value in $width-values {  
+      .#{$class}-#{$name} {
+        #{$prop}: #{$value};        
+      }
+    }
+  }
+  
+  @each $name, $prop, $value in $variable-widths {
+    .#{$name} {
+      #{$prop}: #{$value};
+    }
+  }
+} // end-widths

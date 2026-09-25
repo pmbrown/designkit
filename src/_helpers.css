@@ -1,0 +1,93 @@
+.fg {
+  --link: var(--fg);
+  color: var(--fg);
+}
+
+.fg-active:is(:hover, :focus, :focus-within) {
+  --link: var(--fg-active);
+  color: var(--fg-active);
+}
+
+.fg-text {
+  --link: var(--text);
+  color: var(--text);
+}
+
+.fg-black {
+  --link: #000;
+  color: #000;
+}
+
+.fg-white {
+  --link: #fff;
+  color: #fff;
+}
+
+.bg {
+  color: var(--fg, contrast-color(var(--bg)));
+  background-color: var(--bg);
+}
+
+.bg-active:is(:hover, :focus, :focus-within) {
+  color: var(--fg-active, contrast-color(var(--bg-active)));
+  background-color: var(--bg-active);
+}
+
+.bg-page {
+  background-color: var(--canvas);
+}
+
+.outline, .outline * {
+  outline-color: var(--outline);
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  
+  input {
+    border-start-end-radius: 0;
+    border-end-end-radius: 0;
+  }
+  
+  button {
+    margin-inline-start: -1px;
+    border-start-start-radius: 0;
+    border-end-start-radius: 0;
+  }
+  
+  :focus {
+    outline: none;
+  }
+}
+
+.link-box {
+  position: relative;
+  cursor: pointer;
+  
+  a:after {
+    content: "";
+    display: block;
+    position: absolute;
+    inset: 0;
+  }
+  
+  a:focus-visible {
+    outline: none;
+  }
+}
+
+.modal-box {
+  block-size: var(--modal-block, fit-content);
+  max-block-size: var(--modal-height, calc(100dvh - 2rem));
+  inline-size: var(--modal-inline, calc(100% - 6px - 2em));
+  max-inline-size: var(--modal-width, 24rem);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.backdrop::backdrop {
+  --backdrop-light: color-mix(in srgb, #000 10%, transparent);
+  --backdrop-dark: color-mix(in srgb, #000 40%, transparent);
+  background-color: light-dark(var(--backdrop-light), var(--backdrop-dark));
+}

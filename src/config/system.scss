@@ -1,0 +1,94 @@
+// ------------------------------------------------------------
+// System
+// ------------------------------------------------------------
+$version: '0.1.0';
+
+// Root tokens (also see icons below)
+$enable-reset-tokens:               true !default; // font-family, color-scheme
+$enable-font-size-tokens:           true !default;
+$enable-line-height-tokens:         true !default;
+$enable-surface-colors-tokens:      true !default;
+$enable-primary-colors-tokens:      true !default;
+
+// Primary colors (requires tokens)
+$enable-color-forms:                true !default;
+$enable-color-buttons:              true !default;
+$enable-color-tables:               true !default;
+$enable-color-backgrounds:          true !default;
+$enable-color-borders:              true !default; // border-color values only
+$enable-color-outlines:             true !default;
+$enable-color-texts:                true !default;
+
+// Surface colors (requires tokens)
+$enable-surface-backgrounds:        true !default;
+$enable-surface-borders:            true !default; // border-color values only
+$enable-surface-outlines:           true !default;
+
+// Utilities
+$enable-texts:                      true !default; // requires font-size/line-height tokens
+$enable-borders:                    true !default; // requires surface color tokens
+$enable-radius:                     true !default;
+$enable-inner-radius:               true !default;
+
+// Utility breakpoints
+$enable-vis-hidden-breakpoints:     true !default; // base classes included with styles.css by default
+$enable-texts-breakpoints:          true !default;
+$enable-borders-breakpoints:        true !default;
+$enable-radius-breakpoints:         true !default;
+$enable-inner-radius-breakpoints:   true !default;
+
+// Layouts
+$enable-containers:                 true !default;
+$enable-display:                    true !default;
+$enable-grid:                       true !default;
+$enable-grid-layouts:               true !default; // requires grid enabled
+$enable-flex:                       true !default;
+$enable-align:                      true !default;
+$enable-justify:                    true !default;
+$enable-place:                      true !default;
+$enable-position:                   true !default;
+$enable-inset:                      true !default;
+$enable-zindex:                     true !default;
+$enable-order:                      true !default;
+$enable-overflow:                   true !default; 
+$enable-overscroll:                 true !default;
+$enable-scrollbars:                 true !default;
+$enable-columns:                    true !default;
+$enable-aspect-ratio:               true !default;
+$enable-object-fit:                 true !default;
+$enable-gaps:                       true !default;
+$enable-margins:                    true !default;
+$enable-padding:                    true !default;
+$enable-heights:                    true !default;
+$enable-widths:                     true !default;
+
+// Layout breakpoints
+$enable-display-breakpoints:        true !default;
+$enable-grid-breakpoints:           true !default;
+$enable-grid-layouts-breakpoints:   true !default;
+$enable-flex-breakpoints:           true !default;
+$enable-align-breakpoints:          true !default;
+$enable-justify-breakpoints:        true !default;
+$enable-place-breakpoints:          true !default;
+$enable-position-breakpoints:       true !default;
+$enable-inset-breakpoints:          true !default;
+$enable-zindex-breakpoints:         true !default;
+$enable-order-breakpoints:          true !default;
+$enable-overflow-breakpoints:       true !default; 
+$enable-overscroll-breakpoints:     true !default;
+$enable-scrollbars-breakpoints:     true !default;
+$enable-columns-breakpoints:        true !default;
+$enable-aspect-ratio-breakpoints:   true !default;
+$enable-object-fit-breakpoints:     true !default;
+$enable-gaps-breakpoints:           true !default;
+$enable-margins-breakpoints:        true !default;
+$enable-padding-breakpoints:        true !default;
+$enable-heights-breakpoints:        true !default;
+$enable-widths-breakpoints:         true !default;
+
+// Icons
+$enable-icon-utilities:             true !default;
+$enable-default-icon-tokens:        true !default;
+$enable-default-icon-classes:       true !default;
+$enable-custom-icon-tokens:         true !default;
+$enable-custom-icon-classes:        true !default;

@@ -1,0 +1,84 @@
+// ------------------------------------------------------------
+// Root
+// ------------------------------------------------------------
+@use "config" as *;
+
+/*! DesignKit v#{$version} - Copyright (c) 2026 Phil Brown */
+
+#{$root-variables} {
+  @if $enable-reset-tokens {
+    @each $name, $value in $reset-tokens {
+      --#{$name}: #{$value};
+    }
+  }
+  
+  @if $enable-font-size-tokens {  
+    @each $name, $value in $font-sizes {
+      --fs-#{$name}: #{$value};
+    }
+  }
+  
+  @if $enable-line-height-tokens {
+    @each $name, $value in $line-heights {
+      --#{$name}: #{$value};
+    }
+  }
+  
+  @if $enable-surface-colors-tokens {
+    @each $name, $value in $surface-colors {
+      --#{$name}: #{$value};
+    }
+  }
+
+  @each $name, $value in $custom-tokens {
+    --#{$name}: #{$value};
+  }
+
+  @if $enable-primary-colors-tokens {
+    @each $color, $value in $color-tokens {
+      --#{$color}: #{$value};
+      
+      @each $token, $percent in $lighten-values {
+        --#{$color}-#{$token}: color-mix(in #{$color-mix}, var(--#{$color}), #fff #{$percent});
+      }
+      
+      --#{$color}-#{$middle-token}: var(--#{$color});
+      
+      @each $token, $percent in $darken-values {
+        --#{$color}-#{$token}: color-mix(in #{$color-mix}, var(--#{$color}), #000 #{$percent});
+      }
+    }
+  }
+
+  @if $enable-default-icon-tokens {  
+    @each $name, $value in $standard-icons {
+      --#{$icon-prefix}-#{$name}: #{$value};
+    }
+
+    @each $name, $value in $scheme-icons {
+      --#{$icon-prefix}-#{$name}: #{$value};
+    }
+
+    @each $name, $value in $caret-icons {
+      --#{$icon-prefix}-#{$name}: #{$value};
+    }
+
+    @each $name, $value in $box-icons {
+      --#{$icon-prefix}-#{$name}: #{$value};
+    }
+
+    @each $name, $value in $circle-icons {
+      --#{$icon-prefix}-#{$name}: #{$value};
+    }
+
+    @each $name, $value in $brand-icons {
+      --#{$icon-prefix}-#{$name}: #{$value};
+    }
+  }
+
+  @if $enable-custom-icon-tokens {
+    @each $name, $value in $custom-icons {
+      --#{$icon-prefix}-#{$name}: #{$value};
+    }
+  }
+}

@@ -1,0 +1,390 @@
+// ------------------------------------------------------------
+// Breakpoints
+// ------------------------------------------------------------
+@use "config" as *;
+
+@each $breakpoint, $width in $breakpoint-sizes {
+  @media (#{$breakpoint-query} #{$width}) {
+    
+    // Vis-hidden
+    @if $enable-vis-hidden-breakpoints {
+      .vis-hidden-#{$breakpoint}, .vis-hidden-focus-#{$breakpoint}:not(:focus):not(:focus-within) {
+        position: absolute;
+        block-size: 1px;
+        inline-size: 1px;
+        margin: -1px;
+        overflow: hidden;
+        clip-path: inset(50%);
+        white-space: nowrap;
+      }
+    } // end vis-hidden
+
+    // Text
+    @if $enable-texts-breakpoints {
+      .decoration-none-#{$breakpoint}, .decoration-none-#{$breakpoint} * {
+        text-decoration: none;
+      }
+      
+      @each $name, $value in $font-sizes {
+        .fs-#{$name}-#{$breakpoint} {
+          font-size: #{$value};
+        }
+      }
+      
+      @each $name, $value in $line-heights {
+        .#{$name}-#{$breakpoint} {
+          line-height: #{$value};
+        }
+      }
+
+      @each $name, $value in $font-weights {
+        .fw-#{$name}-#{$breakpoint} {
+          font-weight: #{$value};
+        }
+      }
+
+      @each $name, $prop, $value in $text-align-wrap {
+        .#{$name}-#{$breakpoint}, .#{$name}-#{$breakpoint} * {
+          #{$prop}: #{$value};
+        }
+      }
+    } // end-text
+      
+    // Borders
+    @if $enable-borders-breakpoints {
+      @each $name, $prop in $border-props { 
+        .#{$name}-none-#{$breakpoint} {
+          #{$prop}: none;        
+        }
+      }
+      
+      @each $name, $prop in $border-props {
+        .#{$name}-#{$breakpoint} {
+          #{$prop}: $border-values;        
+        }
+      }
+    } // end-borders
+     
+    // Radius
+    @if $enable-radius-breakpoints {
+      .rd-#{$breakpoint} {
+        border-radius: var(--rd-#{$breakpoint});
+      }
+        
+      @each $name, $value in $border-radius-values {
+        .#{$name}-#{$breakpoint} {
+          border-radius: #{$value};
+        }
+      }
+        
+      @each $name, $value in $border-radius-single-values {
+        .#{$name}-#{$breakpoint} {
+          border-radius: #{$value};
+        }
+      }
+
+      @each $name, $value in $border-radius-values {
+        @each $class, $start, $end in $radius-props {
+          .#{$name}-#{$class}-#{$breakpoint} {
+            #{$start}: #{$value};
+            #{$end}: #{$value};
+          }
+        }
+      }
+    } // end-radius
+    
+    // Inner radius
+    @if $enable-inner-radius-breakpoints {
+      @each $name, $value in $border-radius-inner-values {
+        .#{$name}-inner-#{$breakpoint} {
+          border-radius: calc(#{$value} - #{$radius-sub-width});
+        }
+      }
+    
+      @each $name, $value in $border-radius-inner-values {
+        @each $class, $start, $end in $radius-props {
+          .#{$name}-#{$class}-inner-#{$breakpoint} {
+            #{$start}: calc(#{$value} - #{$radius-sub-width});
+            #{$end}: calc(#{$value} - #{$radius-sub-width});
+          }
+        }
+      }
+    } // end-inner-radius
+
+    // Display
+    @if $enable-display-breakpoints {
+      @each $name, $value in $display-values {
+        .#{$name}-#{$breakpoint} {
+          display: #{$value};
+        }
+      }
+    } // end-display
+    
+    // Flex
+    @if $enable-flex-breakpoints {
+      @each $name, $prop, $value in $flex-utility-values {
+        .#{$name}-#{$breakpoint} {
+          #{$prop}: #{$value};
+        }
+      }
+    } // end-flex
+    
+    // Grids
+    @if $enable-grid-breakpoints {
+      @each $name, $prop, $value in $grid-utility-values {
+        .#{$name}-#{$breakpoint} {
+          #{$prop}: $value;
+        }
+      }
+      
+      @for $value from 1 through $grid-column-values {
+        .g-#{$value}-#{$breakpoint} {
+          --cols: #{$value};
+        }
+      }
+      
+      // Grid layouts
+      @if $enable-grid-layouts-breakpoints {
+        @each $class, $prop, $span in $grid-column-props {
+          @for $value from 1 through $grid-column-values {
+            .#{$class}-#{$value}-#{$breakpoint} {
+              #{$prop}: #{$span} $value;
+            }
+          }
+        }
+          
+        @each $class, $prop, $span in $grid-row-props {
+          @for $value from 1 through $grid-row-values {
+            .#{$class}-#{$value}-#{$breakpoint} {
+              #{$prop}: #{$span} $value;
+            }
+          }
+        }      
+      } // end-grid-layouts
+    } // end-grids
+    
+    // Align
+    @if $enable-align-breakpoints {
+      @each $name, $value in $content-items-values {
+        .align-items-#{$name}-#{$breakpoint} {
+          align-items: #{$value};
+        }
+      }
+      
+      @each $name, $value in $content-space-values {
+        .align-content-#{$name}-#{$breakpoint} {
+          align-content: #{$value};
+        }
+      }
+    } // end-align
+    
+    // Justify
+    @if $enable-justify-breakpoints {
+      @each $name, $value in $content-items-values {
+        .justify-items-#{$name}-#{$breakpoint} {
+          justify-items: #{$value};
+        }
+      }
+      
+      @each $name, $value in $content-space-values {
+        .justify-content-#{$name}-#{$breakpoint} {
+          justify-content: #{$value};
+        }
+      }
+    } // end-justify
+    
+    // Place
+    @if $enable-place-breakpoints {
+      @each $name, $value in $content-items-values {
+        .place-items-#{$name}-#{$breakpoint} {
+          place-items: #{$value};
+        }
+      }
+      
+      @each $name, $value in $content-space-values {
+        .place-content-#{$name}-#{$breakpoint} {
+          place-content: #{$value};
+        }
+      }
+    } // end-place
+    
+    // Position
+    @if $enable-position-breakpoints {
+      @each $name, $value in $position-values {
+        .position-#{$name}-#{$breakpoint} {
+          position: #{$value};
+        }
+      }
+    } // end-position
+    
+    // Inset
+    @if $enable-inset-breakpoints {
+      @each $name, $prop in $inset-values {
+        .#{$name}-#{$breakpoint} {
+          #{$prop}: var(--#{$name}-#{$breakpoint}, 0);
+        }
+      }
+    
+      @each $name, $prop in $inset-values {
+        .#{$name}-revert-#{$breakpoint} {
+          #{$prop}: revert;
+        }
+      }
+    } // end-inset
+    
+    // Z-index
+    @if $enable-zindex-breakpoints {
+      @each $name, $value in $zindex-values {
+        .#{$name}-#{$breakpoint} {
+          z-index: #{$value};
+        }
+      }
+    } // end-z-index
+    
+    // Order
+    @if $enable-order-breakpoints {
+      @each $name, $value in $order-values {
+      .#{$name}-#{$breakpoint} {
+          order: #{$value};        
+        }
+      }
+    } // end-order
+
+    // Overflow
+    @if $enable-overflow-breakpoints {
+      @each $name, $value in $overflow-values {
+        @each $class, $prop in $overflow-props {
+          .#{$class}-#{$name}-#{$breakpoint} {
+            #{$prop}: #{$value};
+          }
+        }
+      }
+    } // end-overflow
+    
+    // Overscroll
+    @if $enable-overscroll-breakpoints {
+      @each $name, $value in $overscroll-values {
+        .#{$name}-#{$breakpoint} {
+          overscroll-behavior: #{$value};
+        }
+      }
+    } // end-overscroll
+    
+    // Scrollbars
+    @if $enable-scrollbars-breakpoints {
+      @each $name, $value in $scrollbar-widths {
+        .#{$name}-#{$breakpoint} {
+          scrollbar-width: #{$value};
+        }
+      }
+      
+      @each $name, $value in $scrollbar-gutter {
+        .#{$name}-#{$breakpoint} {
+          scrollbar-gutter: #{$value};
+        }
+      }
+    } // end-scrollbars
+
+    // Columns
+    @if $enable-columns-breakpoints {
+      .columns-#{$breakpoint} {
+        columns: var(--cols);
+      }
+    
+      @for $value from 1 through $column-values {
+        .columns-#{$value}-#{$breakpoint} {
+          columns: $value;
+        }
+      }
+    } // end-columns
+
+    // Aspect-ratio
+    @if $enable-aspect-ratio-breakpoints {
+      .ratio-#{$breakpoint}, .ratio-group-#{$breakpoint} *:not(figcaption) {
+        aspect-ratio: var(--ratio);
+      }
+    
+      @each $name, $value in $aspect-ratio-values {
+        .ratio-#{$name}-#{$breakpoint}, .ratio-group-#{$name}-#{$breakpoint} *:not(figcaption) {
+          aspect-ratio: $value;     
+        }    
+      }
+    } // end-aspect-ratio
+
+    // Object-fit
+    @if $enable-object-fit-breakpoints {  
+      @each $name, $value in $object-fit-values {
+        .object-fit-#{$name}-#{$breakpoint}, .object-fit-group-#{$name}-#{$breakpoint} * {
+          object-fit: $value;       
+        }
+      }
+    } // end-object-fit
+    
+    // Gaps
+    @if $enable-gaps-breakpoints {
+      @each $name, $value in $gap-values {
+        @each $class, $prop in $gap-props {
+          .#{$class}-#{$name}-#{$breakpoint} {
+            #{$prop}: #{$value};        
+          }
+        }
+      }
+    } // end-gaps
+    
+    // Margins
+    @if $enable-margins-breakpoints {  
+      @each $name, $value in $margin-values {
+        @each $class, $prop in $margin-props {
+          .#{$class}-#{$name}-#{$breakpoint} {
+            #{$prop}: #{$value};        
+          }
+        }
+      }
+    } // end-margins
+    
+    // Padding
+    @if $enable-padding-breakpoints {  
+      @each $name, $value in $padding-values {
+        @each $class, $prop in $padding-props {
+          .#{$class}-#{$name}-#{$breakpoint} {
+            #{$prop}: #{$value};        
+          }
+        }
+      }
+    } // end-padding
+
+    // Heights
+    @if $enable-heights-breakpoints {
+      @each $class, $prop in $height-props {
+        @each $name, $value in $height-values {
+          .#{$class}-#{$name}-#{$breakpoint} {
+            #{$prop}: #{$value};        
+          }
+        }
+      }
+      
+      @each $name, $prop, $value in $variable-heights {
+        .#{$name}-#{$breakpoint} {
+          #{$prop}: #{$value};
+        }
+      }
+    } // end-heights
+    
+    // Widths
+    @if $enable-widths-breakpoints {
+      @each $class, $prop in $width-props {
+        @each $name, $value in $width-values {  
+          .#{$class}-#{$name}-#{$breakpoint} {
+            #{$prop}: #{$value};        
+          }
+        }
+      }
+      
+      @each $name, $prop, $value in $variable-widths {
+        .#{$name}-#{$breakpoint} {
+          #{$prop}: #{$value};
+        }
+      }
+    } // end-widths
+  } // end-media
+} // end-breakpoints
