@@ -78,10 +78,10 @@
 }
 
 .modal-box {
-  block-size: var(--modal-block, fit-content);
-  max-block-size: var(--modal-height, calc(100dvh - 2rem));
-  inline-size: var(--modal-inline, calc(100% - 6px - 2em));
-  max-inline-size: var(--modal-width, 24rem);
+  block-size: var(--modal-y, fit-content);
+  max-block-size: var(--modal-y-max, calc(100dvh - 2rem));
+  inline-size: var(--modal-x, calc(100% - 6px - 2em));
+  max-inline-size: var(--modal-x-max, 24rem);
   overflow-y: auto;
   overscroll-behavior: contain;
 }

@@ -123,7 +123,23 @@
 // Primary color utilities
 // ------------------------------------------------------------
 @if $enable-color-backgrounds {
-  @each $name, $token in $color-tokens {
+  @if $enable-primary-colors-tokens {
+    @each $name, $token in $colors {
+      .bg-#{$name}, .bg-#{$name}-active:is(:hover, :focus, :focus-within) {
+        color: var(--fg, contrast-color(var(--#{$name})));
+        background-color: var(--#{$name});
+      }    
+      
+      @for $value from 1 through $color-utilities { 
+        .bg-#{$name}-#{$value}, .bg-#{$name}-#{$value}-active:is(:hover, :focus, :focus-within) {
+          color: var(--fg, contrast-color(var(--#{$name}-#{$value})));
+          background-color: var(--#{$name}-#{$value});
+        }    
+      }
+    }  
+  }
+  
+  @each $name, $token in $custom-colors {
     .bg-#{$name}, .bg-#{$name}-active:is(:hover, :focus, :focus-within) {
       color: var(--fg, contrast-color(var(--#{$name})));
       background-color: var(--#{$name});
@@ -135,11 +151,25 @@
         background-color: var(--#{$name}-#{$value});
       }    
     }
-  }
+  }    
 }
 
 @if $enable-color-borders {
-  @each $name, $token in $color-tokens {
+  @if $enable-primary-colors-tokens {
+    @each $name, $token in $colors {
+      .bd-#{$name}, .bd-#{$name}-active:is(:hover, :focus, :focus-within) {
+        border-color: var(--#{$name});
+      } 
+      
+      @for $value from 1 through $color-utilities { 
+        .bd-#{$name}-#{$value}, .bd-#{$name}-#{$value}-active:is(:hover, :focus, :focus-within) {
+          border-color: var(--#{$name}-#{$value});
+        }    
+      }
+    }
+  }
+
+  @each $name, $token in $custom-colors {
     .bd-#{$name}, .bd-#{$name}-active:is(:hover, :focus, :focus-within) {
       border-color: var(--#{$name});
     } 
@@ -153,7 +183,21 @@
 }
 
 @if $enable-color-outlines {
-  @each $name, $token in $color-tokens {
+  @if $enable-primary-colors-tokens {
+    @each $name, $token in $colors {
+      .outline-#{$name}, .outline-#{$name} * {
+        outline-color: var(--#{$name});
+      } 
+      
+      @for $value from 1 through $color-utilities { 
+        .outline-#{$name}-#{$value}, .outline-#{$name}-#{$value} * {
+          outline-color: var(--#{$name}-#{$value});
+        }    
+      }
+    }  
+  }
+
+  @each $name, $token in $custom-colors {
     .outline-#{$name}, .outline-#{$name} * {
       outline-color: var(--#{$name});
     } 
@@ -167,7 +211,21 @@
 }
 
 @if $enable-color-texts {
-  @each $name, $token in $color-tokens {
+  @if $enable-primary-colors-tokens {
+    @each $name, $token in $colors {
+      .fg-#{$name}, .fg-#{$name}-active:is(:hover, :focus, :focus-within) {
+        color: var(--#{$name});
+      }    
+      
+      @for $value from 1 through $color-utilities { 
+        .fg-#{$name}-#{$value}, .fg-#{$name}-#{$value}-active:is(:hover, :focus, :focus-within) {
+          color: var(--#{$name}-#{$value});
+        }    
+      }
+    }
+  }
+
+  @each $name, $token in $custom-colors {
     .fg-#{$name}, .fg-#{$name}-active:is(:hover, :focus, :focus-within) {
       color: var(--#{$name});
     }    
@@ -180,11 +238,21 @@
   }
 }
 
+
 // ------------------------------------------------------------
 // Primary color modifiers
 // ------------------------------------------------------------
 @if $enable-color-forms {
-  @each $name, $background, $null, $border in $color-modifiers {
+  @if $enable-primary-colors-tokens {
+    @each $name, $background, $null, $border in $color-modifiers {
+      .form-#{$name} {
+        --form-bg: #{$background};
+        --form-bd-color: #{$border};
+      }
+    }
+  }
+
+  @each $name, $background, $null, $border in $custom-color-modifiers {
     .form-#{$name} {
       --form-bg: #{$background};
       --form-bd-color: #{$border};
@@ -193,7 +261,17 @@
 }
 
 @if $enable-color-buttons {
-  @each $name, $background, $hover, $border in $color-modifiers {
+  @if $enable-primary-colors-tokens {
+    @each $name, $background, $hover, $border in $color-modifiers {
+      .btn-#{$name} {
+        --btn-bg: #{$background};
+        --btn-bg-hover: #{$hover};
+        --btn-bd-color: #{$border};
+      }
+    }
+  }
+  
+  @each $name, $background, $hover, $border in $custom-color-modifiers {
     .btn-#{$name} {
       --btn-bg: #{$background};
       --btn-bg-hover: #{$hover};
@@ -203,7 +281,17 @@
 }
 
 @if $enable-color-tables {
-  @each $name, $background, $thead, $border in $color-tables {
+  @if $enable-primary-colors-tokens {
+    @each $name, $background, $thead, $border in $color-tables {
+      .table-#{$name} {
+        --table-bg: #{$background};
+        --thead-bg: #{$thead};
+        --table-bd-color: #{$border};
+      }
+    }
+  }
+
+  @each $name, $background, $thead, $border in $custom-color-tables {
     .table-#{$name} {
       --table-bg: #{$background};
       --thead-bg: #{$thead};
@@ -261,9 +349,9 @@
   }
 }
 
-@if $enable-default-icon-classes {
+@if $enable-standard-icon-classes {
   @each $name, $value in $standard-icons {
-    @if $enable-default-icon-tokens {
+    @if $enable-standard-icon-tokens {
       .#{$icon-prefix}-#{$name} {
         --svg: var(--#{$icon-prefix}-#{$name});
       }
@@ -274,9 +362,11 @@
       }
     }
   }
-  
+}
+
+@if $enable-scheme-icon-classes {
   @each $name, $value in $scheme-icons {
-    @if $enable-default-icon-tokens {
+    @if $enable-scheme-icon-tokens {
       .#{$icon-prefix}-#{$name} {
         --svg: var(--#{$icon-prefix}-#{$name});
       }
@@ -287,9 +377,11 @@
       }
     }
   }
+}
 
+@if $enable-caret-icon-classes {
   @each $name, $value in $caret-icons {
-    @if $enable-default-icon-tokens {
+    @if $enable-caret-icon-tokens {
       .#{$icon-prefix}-#{$name} {
         --svg: var(--#{$icon-prefix}-#{$name});
       }
@@ -300,9 +392,11 @@
       }
     }
   }
+}
 
+@if $enable-box-icon-classes {
   @each $name, $value in $box-icons {
-    @if $enable-default-icon-tokens {
+    @if $enable-box-icon-tokens {
       .#{$icon-prefix}-#{$name} {
         --svg: var(--#{$icon-prefix}-#{$name});
       }
@@ -313,9 +407,11 @@
       }
     }
   }
+}
 
+@if $enable-circle-icon-classes {
   @each $name, $value in $circle-icons {
-    @if $enable-default-icon-tokens {
+    @if $enable-circle-icon-tokens {
       .#{$icon-prefix}-#{$name} {
         --svg: var(--#{$icon-prefix}-#{$name});
       }
@@ -326,9 +422,11 @@
       }
     }
   }
+}
 
+@if $enable-brand-icon-classes {
   @each $name, $value in $brand-icons {
-    @if $enable-default-icon-tokens {
+    @if $enable-brand-icon-tokens {
       .#{$icon-prefix}-#{$name} {
         --svg: var(--#{$icon-prefix}-#{$name});
       }

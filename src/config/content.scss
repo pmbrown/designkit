@@ -65,7 +65,7 @@ $darken-values: (
   "9": 45%,
 ) !default;
 
-$color-tokens: (
+$colors: (
   "blue": $blue,
   "green": $green,
   "red": $red,
@@ -73,6 +73,8 @@ $color-tokens: (
   "yellow": $yellow,
   "gray": $gray,
 ) !default;
+
+$custom-colors: () !default;
 
 // ------------------------------------------------------------
 // Primary color modifiers
@@ -88,6 +90,8 @@ $color-modifiers: (
   "gray" var(--gray-5) var(--gray-4) var(--gray-6),
 ) !default;
 
+$custom-color-modifiers: () !default;
+
 // Table color modifiers
 // "name" | background | thead | border
 $color-tables: (
@@ -98,6 +102,8 @@ $color-tables: (
   "yellow" var(--yellow-4) var(--yellow-5) var(--yellow-6),
   "gray" var(--gray-4) var(--gray-5) var(--gray-6),
 ) !default;
+
+$custom-color-tables: () !default;
 
 // ------------------------------------------------------------
 // Font-sizes

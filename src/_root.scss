@@ -35,7 +35,7 @@
   }
 
   @if $enable-primary-colors-tokens {
-    @each $color, $value in $color-tokens {
+    @each $color, $value in $colors {
       --#{$color}: #{$value};
       
       @each $token, $percent in $lighten-values {
@@ -50,30 +50,54 @@
     }
   }
 
-  @if $enable-default-icon-tokens {  
+  @each $color, $value in $custom-colors {
+    --#{$color}: #{$value};
+    
+    @each $token, $percent in $lighten-values {
+      --#{$color}-#{$token}: color-mix(in #{$color-mix}, var(--#{$color}), #fff #{$percent});
+    }
+
+    --#{$color}-#{$middle-token}: var(--#{$color});
+
+    @each $token, $percent in $darken-values {
+      --#{$color}-#{$token}: color-mix(in #{$color-mix}, var(--#{$color}), #000 #{$percent});
+    }
+  }
+
+  @if $enable-standard-icon-tokens {  
     @each $name, $value in $standard-icons {
       --#{$icon-prefix}-#{$name}: #{$value};
     }
-
+  }
+  
+  @if $enable-scheme-icon-tokens {
     @each $name, $value in $scheme-icons {
       --#{$icon-prefix}-#{$name}: #{$value};
-    }
+    }  
+  }
 
+  @if $enable-caret-icon-tokens {
     @each $name, $value in $caret-icons {
       --#{$icon-prefix}-#{$name}: #{$value};
-    }
+    }  
+  }
 
+  @if $enable-box-icon-tokens {
     @each $name, $value in $box-icons {
       --#{$icon-prefix}-#{$name}: #{$value};
-    }
+    }  
+  }
 
+  @if $enable-circle-icon-tokens {
     @each $name, $value in $circle-icons {
       --#{$icon-prefix}-#{$name}: #{$value};
-    }
-
+    }  
+  }
+  
+  @if $enable-brand-icon-tokens {
     @each $name, $value in $brand-icons {
       --#{$icon-prefix}-#{$name}: #{$value};
-    }
+    }  
   }
 
   @if $enable-custom-icon-tokens {

@@ -3,14 +3,19 @@
 // ------------------------------------------------------------
 $version: '0.1.0';
 
-// Root tokens (also see icons below)
+// ------------------------------------------------------------
+// Root CSS variable tokens (icons enabled separately below)
+// ------------------------------------------------------------
 $enable-reset-tokens:               true !default; // font-family, color-scheme
 $enable-font-size-tokens:           true !default;
 $enable-line-height-tokens:         true !default;
 $enable-surface-colors-tokens:      true !default;
 $enable-primary-colors-tokens:      true !default;
 
-// Primary colors (requires tokens)
+// ------------------------------------------------------------
+// Color utilities
+// ------------------------------------------------------------
+// Requires primary and/or custom color tokens
 $enable-color-forms:                true !default;
 $enable-color-buttons:              true !default;
 $enable-color-tables:               true !default;
@@ -19,25 +24,27 @@ $enable-color-borders:              true !default; // border-color values only
 $enable-color-outlines:             true !default;
 $enable-color-texts:                true !default;
 
-// Surface colors (requires tokens)
+// Requires surface tokens
 $enable-surface-backgrounds:        true !default;
 $enable-surface-borders:            true !default; // border-color values only
 $enable-surface-outlines:           true !default;
 
-// Utilities
+// ------------------------------------------------------------
+// Utilities & breakpoints
+// ------------------------------------------------------------
+// Design
 $enable-texts:                      true !default; // requires font-size/line-height tokens
-$enable-borders:                    true !default; // requires surface color tokens
+$enable-borders:                    true !default; // requires surface color tokens or custom color values
 $enable-radius:                     true !default;
 $enable-inner-radius:               true !default;
 
-// Utility breakpoints
-$enable-vis-hidden-breakpoints:     true !default; // base classes included with styles.css by default
+$enable-vis-hidden-breakpoints:     true !default; // base classes included by default (_styles.css)
 $enable-texts-breakpoints:          true !default;
 $enable-borders-breakpoints:        true !default;
 $enable-radius-breakpoints:         true !default;
 $enable-inner-radius-breakpoints:   true !default;
 
-// Layouts
+// Layout
 $enable-containers:                 true !default;
 $enable-display:                    true !default;
 $enable-grid:                       true !default;
@@ -46,23 +53,7 @@ $enable-flex:                       true !default;
 $enable-align:                      true !default;
 $enable-justify:                    true !default;
 $enable-place:                      true !default;
-$enable-position:                   true !default;
-$enable-inset:                      true !default;
-$enable-zindex:                     true !default;
-$enable-order:                      true !default;
-$enable-overflow:                   true !default; 
-$enable-overscroll:                 true !default;
-$enable-scrollbars:                 true !default;
-$enable-columns:                    true !default;
-$enable-aspect-ratio:               true !default;
-$enable-object-fit:                 true !default;
-$enable-gaps:                       true !default;
-$enable-margins:                    true !default;
-$enable-padding:                    true !default;
-$enable-heights:                    true !default;
-$enable-widths:                     true !default;
 
-// Layout breakpoints
 $enable-display-breakpoints:        true !default;
 $enable-grid-breakpoints:           true !default;
 $enable-grid-layouts-breakpoints:   true !default;
@@ -70,6 +61,35 @@ $enable-flex-breakpoints:           true !default;
 $enable-align-breakpoints:          true !default;
 $enable-justify-breakpoints:        true !default;
 $enable-place-breakpoints:          true !default;
+
+// Spacing & sizes
+$enable-gaps:                       true !default;
+$enable-margins:                    true !default;
+$enable-padding:                    true !default;
+$enable-heights:                    true !default;
+$enable-widths:                     true !default;
+
+$enable-gaps-breakpoints:           true !default;
+$enable-margins-breakpoints:        true !default;
+$enable-padding-breakpoints:        true !default;
+$enable-heights-breakpoints:        true !default;
+$enable-widths-breakpoints:         true !default;
+
+// Layout design
+$enable-aspect-ratio:               true !default;
+$enable-object-fit:                 true !default;
+$enable-columns:                    true !default;
+$enable-position:                   true !default;
+$enable-inset:                      true !default;
+$enable-zindex:                     true !default;
+$enable-order:                      true !default;
+$enable-overflow:                   true !default; 
+$enable-overscroll:                 true !default;
+$enable-scrollbars:                 true !default;
+
+$enable-aspect-ratio-breakpoints:   true !default;
+$enable-object-fit-breakpoints:     true !default;
+$enable-columns-breakpoints:        true !default;
 $enable-position-breakpoints:       true !default;
 $enable-inset-breakpoints:          true !default;
 $enable-zindex-breakpoints:         true !default;
@@ -77,18 +97,29 @@ $enable-order-breakpoints:          true !default;
 $enable-overflow-breakpoints:       true !default; 
 $enable-overscroll-breakpoints:     true !default;
 $enable-scrollbars-breakpoints:     true !default;
-$enable-columns-breakpoints:        true !default;
-$enable-aspect-ratio-breakpoints:   true !default;
-$enable-object-fit-breakpoints:     true !default;
-$enable-gaps-breakpoints:           true !default;
-$enable-margins-breakpoints:        true !default;
-$enable-padding-breakpoints:        true !default;
-$enable-heights-breakpoints:        true !default;
-$enable-widths-breakpoints:         true !default;
 
+// ------------------------------------------------------------
 // Icons
+// ------------------------------------------------------------
+// Utilities (.ico-* display classes)
 $enable-icon-utilities:             true !default;
-$enable-default-icon-tokens:        true !default;
-$enable-default-icon-classes:       true !default;
+
+// Icon tokens
+$enable-standard-icon-tokens:       true !default;
+$enable-scheme-icon-tokens:         true !default;
+$enable-caret-icon-tokens:          true !default;
+$enable-box-icon-tokens:            true !default;
+$enable-circle-icon-tokens:         true !default;
+$enable-brand-icon-tokens:          true !default;
 $enable-custom-icon-tokens:         true !default;
+
+// Icon classes
+// The icon-tokens are used if enabled, if disabled
+// the icon SVG data is compiled with the classes.
+$enable-standard-icon-classes:      true !default;
+$enable-scheme-icon-classes:        true !default;
+$enable-caret-icon-classes:         true !default;
+$enable-box-icon-classes:           true !default;
+$enable-circle-icon-classes:        true !default;
+$enable-brand-icon-classes:         true !default;
 $enable-custom-icon-classes:        true !default;
