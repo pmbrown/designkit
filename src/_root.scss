@@ -6,20 +6,26 @@
 /*! DesignKit v#{$version} - Copyright (c) 2026 Phil Brown */
 
 #{$root-variables} {
-  @if $enable-reset-tokens {
-    @each $name, $value in $reset-tokens {
+  @if $enable-typography-tokens {
+    @each $name, $value in $font-stack {
       --#{$name}: #{$value};
     }
-  }
-  
-  @if $enable-font-size-tokens {  
+      
     @each $name, $value in $font-sizes {
       --fs-#{$name}: #{$value};
     }
+
+    @each $name, $value in $line-heights {
+      --#{$name}: #{$value};
+    }
+  }
+
+  @each $name, $value in $custom-tokens {
+    --#{$name}: #{$value};
   }
   
-  @if $enable-line-height-tokens {
-    @each $name, $value in $line-heights {
+  @if $enable-color-scheme-tokens {
+    @each $name, $value in $color-scheme {
       --#{$name}: #{$value};
     }
   }
@@ -28,10 +34,6 @@
     @each $name, $value in $surface-colors {
       --#{$name}: #{$value};
     }
-  }
-
-  @each $name, $value in $custom-tokens {
-    --#{$name}: #{$value};
   }
 
   @if $enable-primary-colors-tokens {

@@ -1,14 +1,13 @@
 // ------------------------------------------------------------
 // System
 // ------------------------------------------------------------
-$version: '0.1.0';
+$version: '0.2.0';
 
 // ------------------------------------------------------------
 // Root CSS variable tokens (icons enabled separately below)
 // ------------------------------------------------------------
-$enable-reset-tokens:               true !default; // font-family, color-scheme
-$enable-font-size-tokens:           true !default;
-$enable-line-height-tokens:         true !default;
+$enable-color-scheme-tokens:        true !default;
+$enable-typography-tokens:          true !default;
 $enable-surface-colors-tokens:      true !default;
 $enable-primary-colors-tokens:      true !default;
 
@@ -35,12 +34,14 @@ $enable-surface-outlines:           true !default;
 // Design
 $enable-texts:                      true !default; // requires font-size/line-height tokens
 $enable-borders:                    true !default; // requires surface color tokens or custom color values
+$enable-border-widths:              true !default;
 $enable-radius:                     true !default;
 $enable-inner-radius:               true !default;
 
 $enable-vis-hidden-breakpoints:     true !default; // base classes included by default (_styles.css)
 $enable-texts-breakpoints:          true !default;
 $enable-borders-breakpoints:        true !default;
+$enable-border-widths-breakpoints:  true !default;
 $enable-radius-breakpoints:         true !default;
 $enable-inner-radius-breakpoints:   true !default;
 

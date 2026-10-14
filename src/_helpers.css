@@ -1,25 +1,23 @@
-.fg {
-  --link: var(--fg);
+.fg, .fg * {
   color: var(--fg);
 }
 
 .fg-active:is(:hover, :focus, :focus-within) {
-  --link: var(--fg-active);
   color: var(--fg-active);
+  * {
+    color: var(--fg-active);
+  }
 }
 
-.fg-text {
-  --link: var(--text);
+.fg-text, .fg-text * {
   color: var(--text);
 }
 
-.fg-black {
-  --link: #000;
+.fg-black, .fg-black * {
   color: #000;
 }
 
-.fg-white {
-  --link: #fff;
+.fg-white, .fg-white * {
   color: #fff;
 }
 
@@ -37,7 +35,7 @@
   background-color: var(--canvas);
 }
 
-.outline, .outline * {
+.outline:focus, .outline:focus * {
   outline-color: var(--outline);
 }
 

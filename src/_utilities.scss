@@ -45,6 +45,17 @@
   }
 }
 
+// Border widths
+@if $enable-border-widths {
+  @each $name, $prop in $border-props {
+    @each $mod, $value in $border-widths {
+      .#{$name}-#{$mod} {
+        #{$prop}-width: $value;        
+      }    
+    } 
+  }
+}
+
 // Radius
 @if $enable-radius {
   .rd {
@@ -125,33 +136,33 @@
 @if $enable-color-backgrounds {
   @if $enable-primary-colors-tokens {
     @each $name, $token in $colors {
-      .bg-#{$name}, .bg-#{$name}-active:is(:hover, :focus, :focus-within) {
+      .bg-#{$name}, .bg-#{$name}-active:is(:hover, :focus-visible) {
         color: var(--fg, contrast-color(var(--#{$name})));
         background-color: var(--#{$name});
-      }    
+      }
       
       @for $value from 1 through $color-utilities { 
-        .bg-#{$name}-#{$value}, .bg-#{$name}-#{$value}-active:is(:hover, :focus, :focus-within) {
+        .bg-#{$name}-#{$value}, .bg-#{$name}-#{$value}-active:is(:hover, :focus-visible) {
           color: var(--fg, contrast-color(var(--#{$name}-#{$value})));
           background-color: var(--#{$name}-#{$value});
-        }    
+        }
       }
-    }  
+    }
   }
   
   @each $name, $token in $custom-colors {
-    .bg-#{$name}, .bg-#{$name}-active:is(:hover, :focus, :focus-within) {
+    .bg-#{$name}, .bg-#{$name}-active:is(:hover, :focus-visible) {
       color: var(--fg, contrast-color(var(--#{$name})));
       background-color: var(--#{$name});
-    }    
+    }
     
     @for $value from 1 through $color-utilities { 
-      .bg-#{$name}-#{$value}, .bg-#{$name}-#{$value}-active:is(:hover, :focus, :focus-within) {
+      .bg-#{$name}-#{$value}, .bg-#{$name}-#{$value}-active:is(:hover, :focus-visible) {
         color: var(--fg, contrast-color(var(--#{$name}-#{$value})));
         background-color: var(--#{$name}-#{$value});
-      }    
+      }
     }
-  }    
+  }
 }
 
 @if $enable-color-borders {
@@ -185,12 +196,12 @@
 @if $enable-color-outlines {
   @if $enable-primary-colors-tokens {
     @each $name, $token in $colors {
-      .outline-#{$name}, .outline-#{$name} * {
+      .outline-#{$name}:focus, .outline-#{$name}:focus * {
         outline-color: var(--#{$name});
       } 
       
       @for $value from 1 through $color-utilities { 
-        .outline-#{$name}-#{$value}, .outline-#{$name}-#{$value} * {
+        .outline-#{$name}-#{$value}:focus, .outline-#{$name}-#{$value}:focus * {
           outline-color: var(--#{$name}-#{$value});
         }    
       }
@@ -198,12 +209,12 @@
   }
 
   @each $name, $token in $custom-colors {
-    .outline-#{$name}, .outline-#{$name} * {
+    .outline-#{$name}:focus, .outline-#{$name}:focus * {
       outline-color: var(--#{$name});
     } 
     
     @for $value from 1 through $color-utilities { 
-      .outline-#{$name}-#{$value}, .outline-#{$name}-#{$value} * {
+      .outline-#{$name}-#{$value}:focus, .outline-#{$name}-#{$value}:focus * {
         outline-color: var(--#{$name}-#{$value});
       }    
     }
@@ -306,6 +317,11 @@
 @if $enable-icon-utilities {
   :is(.#{$icon-prefix}, .#{$icon-prefix}-b, .#{$icon-prefix}-block, .#{$icon-prefix}-block-center):before, .#{$icon-prefix}-a:after {
     @include icon-mask;
+  }
+  
+  .#{$icon-prefix}-active:is(:hover, :focus):before,
+  .#{$icon-prefix}-active:is(:hover, :focus):after {
+    --#{$icon-prefix}: var(--#{$icon-prefix}-active, CurrentColor);
   }
   
   %icon-mask {

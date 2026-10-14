@@ -14,9 +14,9 @@
 }
 
 :where(body) {
-  font-family: var(--font);
+  font-family: var(--font, sans-serif);
   font-size: var(--body-fs, var(--fs-3, 1rem));
-  line-height: var(--body-lh, var(--lh-4, 1.5));
+  line-height: var(--body-lh, var(--lh-5, 1.5));
 }
 
 :where(a) {
@@ -30,20 +30,23 @@
     color: var(--link-visited, color-mix(var(--link, revert) 85%, #fff));
   }
   
+  &:hover, &:focus {
+    color: var(--link-hover, color-mix(var(--link, revert) 70%, #fff));
+  }
+  
+  &:hover, &:focus-visible {
+    text-decoration: var(--link-hover-decoration, none);  
+  }  
+  
   &:focus-visible {
     outline: var(--link-outline-width, 1px) solid var(--link-outline-color, var(--link, revert));
     border-radius: var(--link-focus-radius, 0.125em);
   }
-  
-  &:is(:hover, :focus) {
-    color: var(--link-hover, color-mix(var(--link, revert) 75%, #fff));
-    text-decoration: var(--link-hover-decoration, none);
-  } 
 }
 
 :where(h1, h2, h3, h4, h5, h6) {
   font-weight: var(--heading-fw, bold);
-  line-height: var(--heading-lh, var(--lh-1, revert));
+  line-height: var(--heading-lh, var(--lh-2, revert));
   text-wrap: var(--heading-tw, pretty);
   margin-block-end: var(--heading-mb, 0.85rem);
   
@@ -77,7 +80,7 @@
 }
 
 :where(h6) {
-  --heading-lh: var(--lh-2);
+  --heading-lh: var(--lh-3);
   font-size: var(--h6-fs, var(--fs-5, revert));
 }
 
@@ -99,45 +102,43 @@
 :where(ol, ul, dl) {
   text-wrap: var(--list-tw, pretty);
   margin-block-end: var(--list-mb, 1rem);
-  
-  :is(ol ol, ul ul, ol ul, ul ol, dl dl) {
-    margin-block-end: var(--list-child-mb, 0);
-  }
-  
-  &:is(ol, ul) {
-    list-style-type: var(--marker, revert);
-    padding-inline-start: var(--li-ps, 2rem);  
-  }
-  
-  &:is(dl) {
-    dt {
-      font-weight: var(--dt-fw);
-      &:not(:first-child) {
-        margin-block-start: var(--dt-mt);
-      }  
-    }
-    
-    dd {
-      margin-inline-start: var(--dd-ms, 1rem);
-    }
-  
-    &:is(.dt-bold) {
-      --dt-fw: bold;
-    }  
-  }
+}
 
-  &:is(.list-none) {
-    --marker: "";
-    --li-ps: 0; 
-    --dd-ms: 0;     
-  }
+:where(ol ol, ul ul, ol ul, ul ol, dl dl) {
+  margin-block-end: var(--list-child-mb, 0);
+}
   
-  &:is(.list-flush) {
-    --li-ps: 1rem;
-    --dd-ms: 0;
-    &:is(ul) {
-      --li-ps: 1.2rem;
-    }
+:where(ol, ul) {
+  list-style-type: var(--marker, revert);
+  padding-inline-start: var(--li-ps, 2rem);  
+}
+
+:where(dt) {
+  font-weight: var(--dt-fw);
+  &:not(:first-child) {
+    margin-block-start: var(--dt-mt);
+  }  
+}
+
+:where(dd) {
+  margin-inline-start: var(--dd-ms, 1rem);
+}
+
+.dt-bold {
+  --dt-fw: bold;
+}
+
+.list-none {
+  --marker: "";
+  --li-ps: 0; 
+  --dd-ms: 0;     
+}
+
+.list-flush {
+  --li-ps: 1rem;
+  --dd-ms: 0;
+  &:is(ul) {
+    --li-ps: 1.2rem;
   }
 }
 
@@ -179,18 +180,18 @@
     }
   }
   
-  :is([open] summary) {
+  :where([open] summary) {
     margin-block-end: var(--summary-open-mb, 0.75rem);
   }
+}
+
+.details-none {
+  summary {
+    list-style-type: "";
+  }      
   
-  &:is(.details-none) {
-    summary {
-      list-style-type: "";
-    }      
-    
-    summary::-webkit-details-marker {
-      display: none;
-    }
+  summary::-webkit-details-marker {
+    display: none;
   }
 }
 
@@ -216,17 +217,17 @@
     contain: inline-size;
     padding-block-start: var(--fig-caption-top, 0.5rem);
   }
-  
-  &:is(.figure-box) {
-    figcaption {
-      color: var(--figcaption-fg, contrast-color(var(--figcaption-bg, var(--canvas))));
-      padding-block: var(--figcaption-py, 0.5rem);
-      padding-inline: var(--figcaption-px, 0.75rem);
-      background-color: var(--figcaption-bg, var(--surf-1));
-    }  
-  }
 }
 
+.figure-box {
+  figcaption {
+    color: var(--figcaption-fg, contrast-color(var(--figcaption-bg, var(--canvas))));
+    padding-block: var(--figcaption-py, 0.5rem);
+    padding-inline: var(--figcaption-px, 0.75rem);
+    background-color: var(--figcaption-bg, var(--surf-1));
+  }  
+}
+  
 :where(hr) {
   margin-block-end: var(--hr-mb, 1rem);
   border: none;
@@ -338,8 +339,7 @@
   cursor: pointer;
   -webkit-appearance: button;
   
-  &:where(:hover, :focus),
-  &:focus:not(:focus-visible):hover {
+  &:hover, &:focus-visible {
     background-color: var(--btn-bg-hover, var(--surf-2));
   }
   
@@ -348,7 +348,6 @@
     outline-offset: var(--btn-outline-offset, 0);
     &:not(:focus-visible) {
       outline: none;
-      background-color: var(--btn-bg, var(--surf-1));
     }
   }
   
@@ -467,10 +466,10 @@
   white-space: nowrap;
 }
 
-.light, .light-active:is(:hover, :focus, :focus-within) {
+.light, .light-active:is(:hover, :focus-visible) {
   color-scheme: light;
 }
 
-.dark, .dark-active:is(:hover, :focus, :focus-within) {
+.dark, .dark-active:is(:hover, :focus-visible) {
   color-scheme: dark;
 }

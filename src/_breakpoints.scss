@@ -4,7 +4,7 @@
 @use "config" as *;
 
 @each $breakpoint, $width in $breakpoint-sizes {
-  @media (#{$breakpoint-query} #{$width}) {
+  @media (#{$media-query} #{$width}) {
     
     // Vis-hidden
     @if $enable-vis-hidden-breakpoints {
@@ -64,6 +64,17 @@
         }
       }
     } // end-borders
+    
+    // Border widths
+    @if $enable-border-widths-breakpoints {
+      @each $name, $prop in $border-props {
+        @each $mod, $value in $border-widths {
+          .#{$name}-#{$mod}-#{$breakpoint} {
+            #{$prop}-width: $value;        
+          }    
+        } 
+      }
+    } // end-border-widths
      
     // Radius
     @if $enable-radius-breakpoints {

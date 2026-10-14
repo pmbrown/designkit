@@ -4,7 +4,7 @@
 @use "sass:map";
 
 // Breakpoints
-$breakpoint-query: 'width <' !default;
+$media-query:     'width <' !default;
 
 $breakpoint-sizes: (
   "xl": 1536px,
@@ -17,9 +17,7 @@ $breakpoint-sizes: (
 // Containers
 $container-sizes:  $breakpoint-sizes !default;
 
-// ------------------------------------------------------------
 // Borders
-// ------------------------------------------------------------
 $border-width:    var(--bd-width, 1px) !default;
 $border-color:    var(--bd-color, var(--surf-3)) !default;
 $border-style:    var(--bd-style, solid) !default;
@@ -35,9 +33,15 @@ $border-props: (
   "bd-x": border-inline,
 ) !default;
 
-// ------------------------------------------------------------
+$border-widths: (
+  "1": 1px,
+  "2": 2px,
+  "3": 3px,
+  "4": 4px,
+  "5": 5px,
+) !default;
+
 // Radius
-// ------------------------------------------------------------
 $border-radius-values: (
   "rd-0": 0,
   "rd-1": 0.188rem,
@@ -62,7 +66,6 @@ $radius-props: (
 
 $border-radius-inner-values: map.remove($border-radius-values, "rd-0") !default;
 $radius-sub-width: 'var(--bd-width, 1px)' !default;
-
 
 // Grid
 $grid-column-values:    12 !default;
