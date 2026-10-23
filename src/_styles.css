@@ -377,13 +377,25 @@
   background-color: var(--btn-hover, var(--surf-2));
 }
 
-.btn-sm {
+.form-sm, .input-sm {
+  --form-fs: var(--fs-2);
+  --form-py: 0.25rem;
+  --form-px: 0.5rem;
+}
+
+.form-lg, .input-lg {
+  --form-fs: var(--fs-5);
+  --form-py: 0.375rem;
+  --form-px: 0.875rem;
+}
+
+.btn-sm, .input-sm {
   --btn-fs: var(--fs-2);
   --btn-py: 0.25rem;
   --btn-px: 0.75rem;
 }
 
-.btn-lg {
+.btn-lg, .input-lg {
   --btn-fs: var(--fs-5);
   --btn-py: 0.375rem;
   --btn-px: 1rem;

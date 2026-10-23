@@ -4,82 +4,75 @@
 @use "config" as *;
 
 // Text
-@if $enable-texts {
-  @each $name, $value in $font-sizes {
-    .fs-#{$name} {
-      font-size: var(--fs-#{$name});
-    }
+@each $name, $value in $font-sizes {
+  .fs-#{$name} {
+    font-size: var(--fs-#{$name});
   }
+}
 
-  @each $name, $value in $line-heights {
-    .#{$name} {
-      line-height: var(--#{$name});
-    }
+@each $name, $value in $line-heights {
+  .#{$name} {
+    line-height: var(--#{$name});
   }
+}
 
-  @each $name, $value in $font-weights {
-    .fw-#{$name} {
-      font-weight: #{$value};
-    }
+@each $name, $value in $font-weights {
+  .fw-#{$name} {
+    font-weight: #{$value};
   }
+}
 
-  @each $name, $prop, $value in $text-align-wrap {
-    .#{$name}, .#{$name} * {
-      #{$prop}: #{$value};
-    }
+@each $name, $prop, $value in $text-align-wrap {
+  .#{$name}, .#{$name} * {
+    #{$prop}: #{$value};
   }
 }
 
 // Borders
-@if $enable-borders {
-  @each $name, $prop in $border-props { 
-    .#{$name}-none {
-      #{$prop}: none;        
-    }
+@each $name, $prop in $border-props { 
+  .#{$name}-none {
+    #{$prop}: none;        
   }
+}
   
   @each $name, $prop in $border-props {
     .#{$name} {
       #{$prop}: $border-values;        
     }
   }
-}
+
 
 // Border widths
-@if $enable-border-widths {
-  @each $name, $prop in $border-props {
-    @each $mod, $value in $border-widths {
-      .#{$name}-#{$mod} {
-        #{$prop}-width: $value;        
-      }    
-    } 
-  }
+@each $name, $prop in $border-props {
+  @each $mod, $value in $border-widths {
+    .#{$name}-#{$mod} {
+      #{$prop}-width: $value;        
+    }    
+  } 
 }
 
 // Radius
-@if $enable-radius {
-  .rd {
-    border-radius: var(--rd);
+.rd {
+  border-radius: var(--rd);
+}
+
+@each $name, $value in $border-radius-values {
+  .#{$name} {
+    border-radius: var(--#{$name});
   }
-  
-  @each $name, $value in $border-radius-values {
-    .#{$name} {
-      border-radius: #{$value};
-    }
+}
+
+@each $name, $value in $border-radius-single-values {
+  .#{$name} {
+    border-radius: var(--#{$name});
   }
+}
   
-  @each $name, $value in $border-radius-single-values {
-    .#{$name} {
-      border-radius: #{$value};
-    }
-  }
-  
-  @each $name, $value in $border-radius-values {
-    @each $class, $start, $end in $radius-props {
-      .#{$name}-#{$class} {
-        #{$start}: #{$value};
-        #{$end}: #{$value};
-      }
+@each $name, $value in $border-radius-values {
+  @each $class, $start, $end in $radius-props {
+    .#{$name}-#{$class} {
+      #{$start}: var(--#{$name});
+      #{$end}: var(--#{$name});
     }
   }
 }
@@ -88,45 +81,89 @@
 @if $enable-inner-radius {
   @each $name, $value in $border-radius-inner-values {
     .#{$name}-inner {
-      border-radius: calc(#{$value} - #{$radius-sub-width});
+      border-radius: calc(var(--#{$name}) - #{$radius-sub-width});
     }
   }
 
   @each $name, $value in $border-radius-inner-values {
     @each $class, $start, $end in $radius-props {
       .#{$name}-#{$class}-inner {
-        #{$start}: calc(#{$value} - #{$radius-sub-width});
-        #{$end}: calc(#{$value} - #{$radius-sub-width});
+        #{$start}: calc(var(--#{$name}) - #{$radius-sub-width});
+        #{$end}: calc(var(--#{$name}) - #{$radius-sub-width});
       }
     }
   }
 }
 
 // ------------------------------------------------------------
+// Basic color utilities
+// ------------------------------------------------------------
+.fg-text, .fg-text * {
+  color: var(--text);
+}
+
+.fg-black, .fg-black * {
+  color: #000;
+}
+
+.fg-white, .fg-white * {
+  color: #fff;
+}
+
+.bg-page {
+  color: var(--fg, var(--text));
+  background-color: var(--canvas);
+}
+
+.bg-black {
+  color: var(--fg, #fff);
+  background-color: #000;
+}
+
+.bg-white {
+  color: var(--fg, #000);
+  background-color: #fff;
+}
+
+.fg, .fg * {
+  color: var(--fg);
+}
+
+.fg-active:is(:hover, :focus-visible) {
+  color: var(--fg-active);
+  * {
+    color: var(--fg-active);
+  }
+}
+
+.bg {
+  color: var(--fg, contrast-color(var(--bg)));
+  background-color: var(--bg);
+}
+
+.bg-active:is(:hover, :focus-visible) {
+  color: var(--fg-active, contrast-color(var(--bg-active)));
+  background-color: var(--bg-active);
+}
+
+.outline-color:focus {
+  outline-color: var(--outline);
+}
+
+// ------------------------------------------------------------
 // Surface color utilities
 // ------------------------------------------------------------
-@if $enable-surface-backgrounds {
-  @each $name, $color in $surface-colors {
-    .bg-#{$name}, .bg-#{$name}-active:is(:hover, :focus, :focus-within) {
-      color: var(--fg, contrast-color(var(--#{$name})));
-      background-color: var(--#{$name});
-    }
+
+@each $name, $color in $surface-colors {
+  .bg-#{$name}, .bg-#{$name}-active:is(:hover, :focus-visible) {
+    color: var(--fg, contrast-color(var(--#{$name})));
+    background-color: var(--#{$name});
   }
 }
 
-@if $enable-surface-borders {
-  @each $name, $color in $surface-colors {
-    .bd-#{$name}, .bd-#{$name}-active:is(:hover, :focus, :focus-within) {
-      border-color: var(--#{$name});
-    }
-  }
-}
-
-@if $enable-surface-outlines {
-  @each $name, $color in $surface-colors {
-    .outline-#{$name}, .outline-#{$name} * {
-      outline-color: var(--#{$name});
-    } 
+@each $name, $color in $surface-colors {
+  .bd-#{$name}, .bd-#{$name}-active:is(:hover, :focus-visible) {
+    border-color: var(--#{$name});
   }
 }
 
@@ -168,12 +205,12 @@
 @if $enable-color-borders {
   @if $enable-primary-colors-tokens {
     @each $name, $token in $colors {
-      .bd-#{$name}, .bd-#{$name}-active:is(:hover, :focus, :focus-within) {
+      .bd-#{$name}, .bd-#{$name}-active:is(:hover, :focus-visible) {
         border-color: var(--#{$name});
       } 
       
       @for $value from 1 through $color-utilities { 
-        .bd-#{$name}-#{$value}, .bd-#{$name}-#{$value}-active:is(:hover, :focus, :focus-within) {
+        .bd-#{$name}-#{$value}, .bd-#{$name}-#{$value}-active:is(:hover, :focus-visible) {
           border-color: var(--#{$name}-#{$value});
         }    
       }
@@ -181,12 +218,12 @@
   }
 
   @each $name, $token in $custom-colors {
-    .bd-#{$name}, .bd-#{$name}-active:is(:hover, :focus, :focus-within) {
+    .bd-#{$name}, .bd-#{$name}-active:is(:hover, :focus-visible) {
       border-color: var(--#{$name});
     } 
     
     @for $value from 1 through $color-utilities { 
-      .bd-#{$name}-#{$value}, .bd-#{$name}-#{$value}-active:is(:hover, :focus, :focus-within) {
+      .bd-#{$name}-#{$value}, .bd-#{$name}-#{$value}-active:is(:hover, :focus-visible) {
         border-color: var(--#{$name}-#{$value});
       }    
     }
@@ -224,12 +261,12 @@
 @if $enable-color-texts {
   @if $enable-primary-colors-tokens {
     @each $name, $token in $colors {
-      .fg-#{$name}, .fg-#{$name}-active:is(:hover, :focus, :focus-within) {
+      .fg-#{$name}, .fg-#{$name}-active:is(:hover, :focus-visible) {
         color: var(--#{$name});
       }    
       
       @for $value from 1 through $color-utilities { 
-        .fg-#{$name}-#{$value}, .fg-#{$name}-#{$value}-active:is(:hover, :focus, :focus-within) {
+        .fg-#{$name}-#{$value}, .fg-#{$name}-#{$value}-active:is(:hover, :focus-visible) {
           color: var(--#{$name}-#{$value});
         }    
       }
@@ -237,12 +274,12 @@
   }
 
   @each $name, $token in $custom-colors {
-    .fg-#{$name}, .fg-#{$name}-active:is(:hover, :focus, :focus-within) {
+    .fg-#{$name}, .fg-#{$name}-active:is(:hover, :focus-visible) {
       color: var(--#{$name});
     }    
     
     @for $value from 1 through $color-utilities { 
-      .fg-#{$name}-#{$value}, .fg-#{$name}-#{$value}-active:is(:hover, :focus, :focus-within) {
+      .fg-#{$name}-#{$value}, .fg-#{$name}-#{$value}-active:is(:hover, :focus-visible) {
         color: var(--#{$name}-#{$value});
       }    
     }
@@ -311,457 +348,260 @@
   }
 }
 
-// ----------------------------------------------------------
-// Icon utilities
-// ----------------------------------------------------------
-@if $enable-icon-utilities {
-  :is(.#{$icon-prefix}, .#{$icon-prefix}-b, .#{$icon-prefix}-block, .#{$icon-prefix}-block-center):before, .#{$icon-prefix}-a:after {
-    @include icon-mask;
-  }
-  
-  .#{$icon-prefix}-active:is(:hover, :focus):before,
-  .#{$icon-prefix}-active:is(:hover, :focus):after {
-    --#{$icon-prefix}: var(--#{$icon-prefix}-active, CurrentColor);
-  }
-  
-  %icon-mask {
-    @include icon-mask;
-  }
-  
-  .#{$icon-prefix}-b:before {
-    margin-inline-end: var(--#{$icon-prefix}-me, 0.25em);
-  }
-  
-  .#{$icon-prefix}-a:after {
-    margin-inline-start: var(--#{$icon-prefix}-ms, 0.25em);
-  }
-  
-  .#{$icon-prefix}-block:before, .#{$icon-prefix}-block-center:before {
-    --#{$icon-prefix}-va: initial;
-    display: block;
-    margin-block-end: var(--#{$icon-prefix}-mb);
-  }
-  
-  .#{$icon-prefix}-block-center:before {
-    margin-inline: auto;
-  }
-}
-
-// ----------------------------------------------------------
-// Icon classes
-// ----------------------------------------------------------
-@if $enable-custom-icon-classes {
-  @each $name, $value in $custom-icons {
-    @if $enable-custom-icon-tokens {
-      .#{$icon-prefix}-#{$name} {
-        --svg: var(--#{$icon-prefix}-#{$name});
-      }
-    }
-    @else {
-      .#{$icon-prefix}-#{$name} {
-        --svg: #{$value};
-      }
-    }
-  }
-}
-
-@if $enable-standard-icon-classes {
-  @each $name, $value in $standard-icons {
-    @if $enable-standard-icon-tokens {
-      .#{$icon-prefix}-#{$name} {
-        --svg: var(--#{$icon-prefix}-#{$name});
-      }
-    }
-    @else {
-      .#{$icon-prefix}-#{$name} {
-        --svg: #{$value};
-      }
-    }
-  }
-}
-
-@if $enable-scheme-icon-classes {
-  @each $name, $value in $scheme-icons {
-    @if $enable-scheme-icon-tokens {
-      .#{$icon-prefix}-#{$name} {
-        --svg: var(--#{$icon-prefix}-#{$name});
-      }
-    }
-    @else {
-      .#{$icon-prefix}-#{$name} {
-        --svg: #{$value};
-      }
-    }
-  }
-}
-
-@if $enable-caret-icon-classes {
-  @each $name, $value in $caret-icons {
-    @if $enable-caret-icon-tokens {
-      .#{$icon-prefix}-#{$name} {
-        --svg: var(--#{$icon-prefix}-#{$name});
-      }
-    }
-    @else {
-      .#{$icon-prefix}-#{$name} {
-        --svg: #{$value};
-      }
-    }
-  }
-}
-
-@if $enable-box-icon-classes {
-  @each $name, $value in $box-icons {
-    @if $enable-box-icon-tokens {
-      .#{$icon-prefix}-#{$name} {
-        --svg: var(--#{$icon-prefix}-#{$name});
-      }
-    }
-    @else {
-      .#{$icon-prefix}-#{$name} {
-        --svg: #{$value};
-      }
-    }
-  }
-}
-
-@if $enable-circle-icon-classes {
-  @each $name, $value in $circle-icons {
-    @if $enable-circle-icon-tokens {
-      .#{$icon-prefix}-#{$name} {
-        --svg: var(--#{$icon-prefix}-#{$name});
-      }
-    }
-    @else {
-      .#{$icon-prefix}-#{$name} {
-        --svg: #{$value};
-      }
-    }
-  }
-}
-
-@if $enable-brand-icon-classes {
-  @each $name, $value in $brand-icons {
-    @if $enable-brand-icon-tokens {
-      .#{$icon-prefix}-#{$name} {
-        --svg: var(--#{$icon-prefix}-#{$name});
-      }
-    }
-    @else {
-      .#{$icon-prefix}-#{$name} {
-        --svg: #{$value};
-      }
-    }
-  }
-}
-
-// ----------------------------------------------------------
-// Icon color modifiers - values from $icon-colors: () map
-// ----------------------------------------------------------
-@each $name, $value in $icon-colors {
-  .#{$icon-prefix}-#{$name} {
-    --#{$icon-prefix}: #{$value};
-  }
-}
-
 // ------------------------------------------------------------
 // Layouts
 // ------------------------------------------------------------
-
 // Containers
-@if $enable-containers {
-  .container,
-  [class*=container-] {
-    inline-size: 100%;
-    max-inline-size: var(--container);
-  }
+.container,
+[class*=container-] {
+  inline-size: 100%;
+  max-inline-size: var(--container);
+}
   
-  @each $name, $value in $container-sizes {
-    .container-#{$name} {
-      --container: #{$value};
-    }
+@each $name, $value in $container-sizes {
+  .container-#{$name} {
+    --container: #{$value};
   }
-} // end-containers
+}
 
 // Display
-@if $enable-display {
-  @each $name, $value in $display-values {
-    .#{$name} {
-      display: #{$value};
-    }
+@each $name, $value in $display-values {
+  .#{$name} {
+    display: #{$value};
   }
-} // end-display
+}
 
 // Flex
-@if $enable-flex {
-  @each $name, $prop, $value in $flex-utility-values {
-    .#{$name} {
-      #{$prop}: #{$value};
-    }
+@each $name, $prop, $value in $flex-utility-values {
+  .#{$name} {
+    #{$prop}: #{$value};
   }
-} // end-flex
+}
 
 // Grids
-@if $enable-grid {
-  .grid-columns, .grid-autofit,
-    [class*=grid-columns-], [class*=grid-autofit-] {
-    --rows: repeat(var(--gtr, 1), minmax(0, 1fr));
-    display: grid;
-    grid-template-rows: var(--rows);
-  }
-  
-  @each $name, $prop, $value in $grid-utility-values {
-    .#{$name} {
-      #{$prop}: $value;
-    }
-  }
-  
-  @for $value from 1 through $grid-column-values {
-    .g-#{$value} {
-      --cols: #{$value};
-    }
-  }
-  
-  // Grid layouts
-  @if $enable-grid-layouts {
-    @each $class, $prop, $span in $grid-column-props {
-      @for $value from 1 through $grid-column-values {
-        .#{$class}-#{$value} {
-          #{$prop}: #{$span} $value;
-        }
-      }
-    }
-      
-    @each $class, $prop, $span in $grid-row-props {
-      @for $value from 1 through $grid-row-values {
-        .#{$class}-#{$value} {
-          #{$prop}: #{$span} $value;
-        }
-      }
-    }  
-  } // end-grid-layouts
-} // end-grid
+.grid-columns, .grid-autofit,
+  [class*=grid-columns-], [class*=grid-autofit-] {
+  --rows: repeat(var(--gtr, 1), minmax(0, 1fr));
+  display: grid;
+  grid-template-rows: var(--rows);
+}
 
-// Align
-@if $enable-align {
-  @each $name, $value in $content-items-values {
-    .align-items-#{$name} {
-      align-items: #{$value};
-    }
-  }
-  
-  @each $name, $value in $content-space-values {
-    .align-content-#{$name} {
-      align-content: #{$value};
-    }
-  }
-} // end-align
-
-// Justify
-@if $enable-justify {
-  @each $name, $value in $content-items-values {
-    .justify-items-#{$name} {
-      justify-items: #{$value};
-    }
-  }
-  
-  @each $name, $value in $content-space-values {
-    .justify-content-#{$name} {
-      justify-content: #{$value};
-    }
-  }
-} // end-justify
-
-// Place
-@if $enable-place {
-  @each $name, $value in $content-items-values {
-    .place-items-#{$name} {
-      place-items: #{$value};
-    }
-  }
-  
-  @each $name, $value in $content-space-values {
-    .place-content-#{$name} {
-      place-content: #{$value};
-    }
-  }
-} // end-place
-
-// Position
-@if $enable-position {
-  @each $name, $value in $position-values {
-    .position-#{$name} {
-      position: #{$value};
-    }
-  }
-} // end-position
-
-// Inset
-@if $enable-inset {
-  @each $name, $prop in $inset-values {
-    .#{$name} {
-      #{$prop}: var(--#{$name}, 0);
-    }
-  }
-
-  @each $name, $prop in $inset-values {
-    .#{$name}-revert {
-      #{$prop}: revert;
-    }
-  }
-} // end-inset
-
-// Z-index
-@if $enable-zindex {
-  @each $name, $value in $zindex-values {
-    .#{$name} {
-      z-index: #{$value};
-    }
-  }
-} // end-z-index
-
-// Order
-@if $enable-order {
-  @each $name, $value in $order-values {
+@each $name, $prop, $value in $grid-utility-values {
   .#{$name} {
-      order: #{$value};        
-    }
+    #{$prop}: $value;
   }
-} // end-order
+}
 
-// Overflow
-@if $enable-overflow {
-  @each $name, $value in $overflow-values {
-    @each $class, $prop in $overflow-props {
-      .#{$class}-#{$name} {
-        #{$prop}: #{$value};
+@for $value from 1 through $grid-column-values {
+  .g-#{$value} {
+    --cols: #{$value};
+  }
+}
+  
+// Grid layouts
+@if $enable-grid-layouts {
+  @each $class, $prop, $span in $grid-column-props {
+    @for $value from 1 through $grid-column-values {
+      .#{$class}-#{$value} {
+          #{$prop}: #{$span} $value;
       }
     }
   }
-} // end-overflow
-
-// Overscroll
-@if $enable-overscroll {
-  @each $name, $value in $overscroll-values {
-    .#{$name} {
-      overscroll-behavior: #{$value};
-    }
-  }
-} // end-overscroll
-
-// Scrollbars
-@if $enable-scrollbars {
-  @each $name, $value in $scrollbar-widths {
-    .#{$name} {
-      scrollbar-width: #{$value};
-    }
-  }
-  
-  @each $name, $value in $scrollbar-gutter {
-    .#{$name} {
-      scrollbar-gutter: #{$value};
-    }
-  }
-} // end-scrollbars
-
-// Columns
-@if $enable-columns {
-  .columns {
-    columns: var(--cols);
-  }
-
-  @for $value from 1 through $column-values {
-    .columns-#{$value} {
-      columns: $value;
-    }
-  }
-} // end-columns
-
-// Aspect-ratio
-@if $enable-aspect-ratio {
-  .ratio, .ratio-group *:not(figcaption) {
-    aspect-ratio: var(--ratio);
-  }
-
-  @each $name, $value in $aspect-ratio-values {
-    .ratio-#{$name}, .ratio-group-#{$name} *:not(figcaption) {
-      aspect-ratio: $value;     
-    }    
-  }
-} // end-aspect-ratio
-
-// Object-fit
-@if $enable-object-fit {  
-  @each $name, $value in $object-fit-values {
-    .object-fit-#{$name}, .object-fit-group-#{$name} * {
-      object-fit: $value;       
-    }
-  }
-} // end-object-fit
-
-// Gaps
-@if $enable-gaps {
-  @each $name, $value in $gap-values {
-    @each $class, $prop in $gap-props {
-      .#{$class}-#{$name} {
-        #{$prop}: #{$value};        
+      
+  @each $class, $prop, $span in $grid-row-props {
+    @for $value from 1 through $grid-row-values {
+      .#{$class}-#{$value} {
+        #{$prop}: #{$span} $value;
       }
     }
   }  
-} // end-gaps
+}
+
+
+// Align
+@each $name, $value in $content-items-values {
+  .align-items-#{$name} {
+    align-items: #{$value};
+  }
+}
+
+@each $name, $value in $content-space-values {
+  .align-content-#{$name} {
+    align-content: #{$value};
+  }
+}
+
+// Justify
+@each $name, $value in $content-items-values {
+  .justify-items-#{$name} {
+    justify-items: #{$value};
+  }
+}
+
+@each $name, $value in $content-space-values {
+  .justify-content-#{$name} {
+    justify-content: #{$value};
+  }
+}
+
+// Place
+@each $name, $value in $content-items-values {
+  .place-items-#{$name} {
+    place-items: #{$value};
+  }
+}
+  
+@each $name, $value in $content-space-values {
+  .place-content-#{$name} {
+    place-content: #{$value};
+  }
+}
+
+// Position
+@each $name, $value in $position-values {
+  .position-#{$name} {
+    position: #{$value};
+  }
+}
+
+// Inset
+@each $name, $prop in $inset-values {
+  .#{$name} {
+    #{$prop}: var(--#{$name}, 0);
+  }
+}
+
+@each $name, $prop in $inset-values {
+  .#{$name}-revert {
+    #{$prop}: revert;
+  }
+}
+
+// Z-index
+@each $name, $value in $zindex-values {
+  .#{$name} {
+    z-index: #{$value};
+  }
+}
+
+// Order
+@each $name, $value in $order-values {
+  .#{$name} {
+    order: #{$value};        
+  }
+}
+
+// Overflow
+@each $name, $value in $overflow-values {
+  @each $class, $prop in $overflow-props {
+    .#{$class}-#{$name} {
+      #{$prop}: #{$value};
+    }
+  }
+}
+
+// Overscroll
+@each $name, $value in $overscroll-values {
+  .#{$name} {
+    overscroll-behavior: #{$value};
+  }
+}
+
+// Scrollbars
+@each $name, $value in $scrollbar-widths {
+  .#{$name} {
+    scrollbar-width: #{$value};
+  }
+}
+  
+@each $name, $value in $scrollbar-gutter {
+  .#{$name} {
+    scrollbar-gutter: #{$value};
+  }
+}
+
+// Columns
+.columns {
+  columns: var(--cols);
+}
+
+@for $value from 1 through $column-values {
+  .columns-#{$value} {
+    columns: $value;
+  }
+}
+
+// Aspect-ratio
+.ratio, .ratio-group *:not(figcaption) {
+  aspect-ratio: var(--ratio);
+}
+
+@each $name, $value in $aspect-ratio-values {
+  .ratio-#{$name}, .ratio-group-#{$name} *:not(figcaption) {
+    aspect-ratio: $value;     
+  }
+}
+
+// Object-fit  
+@each $name, $value in $object-fit-values {
+  .object-fit-#{$name}, .object-fit-group-#{$name} * {
+    object-fit: $value;       
+  }
+}
+
+// Gaps
+@each $name, $value in $gap-values {
+  @each $class, $prop in $gap-props {
+    .#{$class}-#{$name} {
+      #{$prop}: var(--s-#{$name});        
+    }
+  }
+}
 
 // Margins
-@if $enable-margins {  
-  @each $name, $value in $margin-values {
-    @each $class, $prop in $margin-props {
-      .#{$class}-#{$name} {
-        #{$prop}: #{$value};        
-      }
+@each $name, $value in $margin-values {
+  @each $class, $prop in $margin-props {
+    .#{$class}-#{$name} {
+      #{$prop}: var(--s-#{$name});        
     }
   }
-} // end-margins
+}
 
 // Padding
-@if $enable-padding {  
-  @each $name, $value in $padding-values {
-    @each $class, $prop in $padding-props {
-      .#{$class}-#{$name} {
-        #{$prop}: #{$value};        
-      }
+@each $name, $value in $padding-values {
+  @each $class, $prop in $padding-props {
+    .#{$class}-#{$name} {
+      #{$prop}: var(--s-#{$name});        
     }
   }
-} // end-padding
+}
 
 // Heights
-@if $enable-heights {
-  @each $class, $prop in $height-props {
-    @each $name, $value in $height-values {
-      .#{$class}-#{$name} {
-        #{$prop}: #{$value};        
-      }
+@each $class, $prop in $height-props {
+  @each $name, $value in $height-values {
+    .#{$class}-#{$name} {
+      #{$prop}: #{$value};        
     }
   }
-  
-  @each $name, $prop, $value in $variable-heights {
-    .#{$name} {
-      #{$prop}: #{$value};
-    }
+}
+
+@each $name, $prop, $value in $variable-heights {
+  .#{$name} {
+    #{$prop}: #{$value};
   }
-} // end-heights
+}
 
 // Widths
-@if $enable-widths {
-  @each $class, $prop in $width-props {
-    @each $name, $value in $width-values {  
-      .#{$class}-#{$name} {
-        #{$prop}: #{$value};        
-      }
+@each $class, $prop in $width-props {
+  @each $name, $value in $width-values {  
+    .#{$class}-#{$name} {
+      #{$prop}: #{$value};        
     }
   }
-  
-  @each $name, $prop, $value in $variable-widths {
-    .#{$name} {
-      #{$prop}: #{$value};
-    }
+}
+
+@each $name, $prop, $value in $variable-widths {
+  .#{$name} {
+    #{$prop}: #{$value};
   }
-} // end-widths
+}

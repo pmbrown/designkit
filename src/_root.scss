@@ -6,34 +6,36 @@
 /*! DesignKit v#{$version} - Copyright (c) 2026 Phil Brown */
 
 #{$root-variables} {
-  @if $enable-typography-tokens {
-    @each $name, $value in $font-stack {
-      --#{$name}: #{$value};
-    }
-      
-    @each $name, $value in $font-sizes {
-      --fs-#{$name}: #{$value};
-    }
+  @each $name, $value in $font-stack {
+    --#{$name}: #{$value};
+  }
 
-    @each $name, $value in $line-heights {
-      --#{$name}: #{$value};
-    }
+  @each $name, $value in $color-scheme {
+    --#{$name}: #{$value};
+  }
+
+  @each $name, $value in $font-sizes {
+    --fs-#{$name}: #{$value};
+  }
+
+  @each $name, $value in $line-heights {
+    --#{$name}: #{$value};
+  }
+
+  @each $name, $value in $spacing-tokens {
+    --s-#{$name}: #{$value};
+  }
+
+  @each $name, $value in $border-radius-tokens {
+    --#{$name}: #{$value};
   }
 
   @each $name, $value in $custom-tokens {
     --#{$name}: #{$value};
   }
-  
-  @if $enable-color-scheme-tokens {
-    @each $name, $value in $color-scheme {
-      --#{$name}: #{$value};
-    }
-  }
-  
-  @if $enable-surface-colors-tokens {
-    @each $name, $value in $surface-colors {
-      --#{$name}: #{$value};
-    }
+
+  @each $name, $value in $surface-colors {
+    --#{$name}: #{$value};
   }
 
   @if $enable-primary-colors-tokens {
@@ -63,48 +65,6 @@
 
     @each $token, $percent in $darken-values {
       --#{$color}-#{$token}: color-mix(in #{$color-mix}, var(--#{$color}), #000 #{$percent});
-    }
-  }
-
-  @if $enable-standard-icon-tokens {  
-    @each $name, $value in $standard-icons {
-      --#{$icon-prefix}-#{$name}: #{$value};
-    }
-  }
-  
-  @if $enable-scheme-icon-tokens {
-    @each $name, $value in $scheme-icons {
-      --#{$icon-prefix}-#{$name}: #{$value};
-    }  
-  }
-
-  @if $enable-caret-icon-tokens {
-    @each $name, $value in $caret-icons {
-      --#{$icon-prefix}-#{$name}: #{$value};
-    }  
-  }
-
-  @if $enable-box-icon-tokens {
-    @each $name, $value in $box-icons {
-      --#{$icon-prefix}-#{$name}: #{$value};
-    }  
-  }
-
-  @if $enable-circle-icon-tokens {
-    @each $name, $value in $circle-icons {
-      --#{$icon-prefix}-#{$name}: #{$value};
-    }  
-  }
-  
-  @if $enable-brand-icon-tokens {
-    @each $name, $value in $brand-icons {
-      --#{$icon-prefix}-#{$name}: #{$value};
-    }  
-  }
-
-  @if $enable-custom-icon-tokens {
-    @each $name, $value in $custom-icons {
-      --#{$icon-prefix}-#{$name}: #{$value};
     }
   }
 }

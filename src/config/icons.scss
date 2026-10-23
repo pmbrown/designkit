@@ -1,9 +1,35 @@
 // ----------------------------------------------------------
 // Icons
 // ----------------------------------------------------------
+$icons-version: '1.0.0';
 $custom-icons: () !default;
 $icon-colors: () !default;
 $icon-prefix: 'ico' !default;
+$icon-root-tokens: ':where(html), :host' !default;
+
+// Utilities (.ico-* display classes)
+$enable-icon-utilities:             true !default;
+
+// Icon tokens
+$enable-standard-icon-tokens:       true !default;
+$enable-scheme-icon-tokens:         true !default;
+$enable-caret-icon-tokens:          true !default;
+$enable-box-icon-tokens:            true !default;
+$enable-circle-icon-tokens:         true !default;
+$enable-brand-icon-tokens:          true !default;
+$enable-custom-icon-tokens:         true !default;
+
+// Icon classes
+// The icon-tokens are used if enabled, if disabled
+// the icon SVG data is compiled with the classes.
+$enable-standard-icon-classes:      true !default;
+$enable-scheme-icon-classes:        true !default;
+$enable-caret-icon-classes:         true !default;
+$enable-box-icon-classes:           true !default;
+$enable-circle-icon-classes:        true !default;
+$enable-brand-icon-classes:         true !default;
+$enable-custom-icon-classes:        true !default;
+
 
 // ----------------------------------------------------------
 // Mixin for display utilities

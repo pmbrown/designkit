@@ -3,7 +3,9 @@
 // ------------------------------------------------------------
 @use "sass:map";
 
-// Breakpoints
+// ------------------------------------------------------------
+// Breakpoints & containers
+// ------------------------------------------------------------
 $media-query:     'width <' !default;
 
 $breakpoint-sizes: (
@@ -14,10 +16,14 @@ $breakpoint-sizes: (
   "xs": 480px,
 ) !default;
 
-// Containers
 $container-sizes:  $breakpoint-sizes !default;
 
+// ------------------------------------------------------------
 // Borders
+// ------------------------------------------------------------
+$enable-borders-breakpoints:        true !default;
+$enable-border-widths-breakpoints:  true !default;
+
 $border-width:    var(--bd-width, 1px) !default;
 $border-color:    var(--bd-color, var(--surf-3)) !default;
 $border-style:    var(--bd-style, solid) !default;
@@ -41,12 +47,18 @@ $border-widths: (
   "5": 5px,
 ) !default;
 
+// ------------------------------------------------------------
 // Radius
+// ------------------------------------------------------------
+$enable-radius-breakpoints:         true !default;
+$enable-inner-radius:               true !default;
+$enable-inner-radius-breakpoints:   true !default;
+
 $border-radius-values: (
   "rd-0": 0,
   "rd-1": 0.188rem,
   "rd-2": 0.25rem,
-  "rd-3": 0.313rem,
+  "rd-3": 0.375rem,
   "rd-4": 0.5rem,
   "rd-5": 0.75rem,
   "rd-6": 1rem,
@@ -56,6 +68,8 @@ $border-radius-single-values: (
   "rd-pill": calc(infinity * 1px),
   "rd-circle": 50%,
 ) !default;
+
+$border-radius-tokens: map.merge($border-radius-values, $border-radius-single-values) !default;
 
 $radius-props: (
   "t" border-start-start-radius border-start-end-radius,
@@ -67,7 +81,9 @@ $radius-props: (
 $border-radius-inner-values: map.remove($border-radius-values, "rd-0") !default;
 $radius-sub-width: 'var(--bd-width, 1px)' !default;
 
-// Grid
+// ------------------------------------------------------------
+// Grids
+// ------------------------------------------------------------
 $grid-column-values:    12 !default;
 $grid-row-values:       6 !default;
 $grid-autofit-value:    300px !default;
@@ -78,6 +94,8 @@ $grid-utility-values: (
   "grid-columns" grid-template-columns #{$grid-columns},
   "grid-autofit" grid-template-columns #{$grid-autofit},
 ) !default;
+
+$enable-grid-layouts:   true !default;
 
 $grid-column-props: (
   "col" grid-column auto / span,
@@ -91,7 +109,9 @@ $grid-row-props: (
   "row-end" grid-row-end null,
 ) !default;
 
+// ------------------------------------------------------------
 // Display
+// ------------------------------------------------------------
 $display-values: (
   "block": block,
   "block-inline": inline-block,
@@ -104,7 +124,9 @@ $display-values: (
   "display-none": none,
 ) !default;
 
+// ------------------------------------------------------------
 // Flex
+// ------------------------------------------------------------
 $flex-utility-values: (
   "flex-row" flex-direction row,
   "flex-column" flex-direction column,
@@ -118,16 +140,19 @@ $flex-utility-values: (
   "flex-shrink-1" flex-shrink 1,
 ) !default;
 
+// ------------------------------------------------------------
 // Gaps, margins, padding
+// ------------------------------------------------------------
 $space-1:   0.25rem !default;
-$space-2:   0.5rem !default;
-$space-3:   0.75rem !default;
-$space-4:   1rem !default;
-$space-5:   1.25rem !default;
-$space-6:   1.5rem !default;
-$space-7:   2rem !default;
-$space-8:   2.5rem !default;
-$space-9:   3rem !default;
+$space-2:   0.375rem !default;
+$space-3:   0.5rem !default;
+$space-4:   0.75rem !default;
+$space-5:   1rem !default;
+$space-6:   1.25rem !default;
+$space-7:   1.5rem !default;
+$space-8:   2rem !default;
+$space-9:   2.5rem !default;
+$space-10:  3rem !default;
 
 $spacing-values: (
   "0": 0,
@@ -140,8 +165,10 @@ $spacing-values: (
   "7": $space-7,
   "8": $space-8,
   "9": $space-9,
+  "10": $space-10,
 ) !default;
 
+$spacing-tokens:  map.set($spacing-values, "auto", auto) !default;
 $gap-values:      $spacing-values !default;
 $padding-values:  $spacing-values !default;
 $margin-values:   map.set($spacing-values, "auto", auto) !default;
@@ -172,7 +199,9 @@ $padding-props: (
   "px": padding-inline,
 ) !default;
 
+// ------------------------------------------------------------
 // Align, justify, place
+// ------------------------------------------------------------
 $content-items-values: (
   "start": start,
   "end": end,
@@ -187,7 +216,9 @@ $content-items-space-values: (
 
 $content-space-values:  map.merge($content-items-values, $content-items-space-values);
 
+// ------------------------------------------------------------
 // Position
+// ------------------------------------------------------------
 $position-values: (
   "absolute": absolute,
   "fixed": fixed,
@@ -196,7 +227,9 @@ $position-values: (
   "revert": revert,
 ) !default;
 
+// ------------------------------------------------------------
 // Inset
+// ------------------------------------------------------------
 $inset-values: (
   "inset": inset,
   "inset-block": inset-block,
@@ -207,7 +240,9 @@ $inset-values: (
   "inset-end": inset-inline-end,
 ) !default;
 
+// ------------------------------------------------------------
 // Z-index
+// ------------------------------------------------------------
 $zindex-values: (
   "z-neg": calc(0 - var(--zmin, 1)),
   "z-0": 0,
@@ -221,7 +256,9 @@ $zindex-values: (
   "z-revert": revert,
 ) !default;
 
+// ------------------------------------------------------------
 // Order
+// ------------------------------------------------------------
 $order-values: (
   "order-0": 0,
   "order-1": 1,
@@ -234,7 +271,9 @@ $order-values: (
   "order-revert": revert,
 ) !default;
 
+// ------------------------------------------------------------
 // Overflow
+// ------------------------------------------------------------
 $overflow-values: (
   "auto": auto,
   "scroll": scroll,
@@ -250,21 +289,27 @@ $overflow-props: (
   "overflow-y": overflow-y,
 ) !default;
 
+// ------------------------------------------------------------
 // Overscroll
+// ------------------------------------------------------------
 $overscroll-values: (
   "overscroll-auto": auto,
   "overscroll-contain": contain,
   "overscroll-revert": revert,
 ) !default;
 
+// ------------------------------------------------------------
 // Scrollbar-width
+// ------------------------------------------------------------
 $scrollbar-widths: (
   "scroll-width-auto": auto,
   "scroll-width-thin": thin,
   "scroll-width-revert": revert,
 ) !default;
 
+// ------------------------------------------------------------
 // Scrollbar-gutter
+// ------------------------------------------------------------
 $scrollbar-gutter: (
   "scroll-gutter-stable": stable,
   "scroll-gutter-stable-edges": stable both-edges,
@@ -272,10 +317,14 @@ $scrollbar-gutter: (
   "scroll-gutter-revert": revert,
 ) !default;
 
+// ------------------------------------------------------------
 // Columns
+// ------------------------------------------------------------
 $column-values:   6 !default;
 
+// ------------------------------------------------------------
 // Aspect-ratio
+// ------------------------------------------------------------
 $aspect-ratio-values: (
   "auto": auto,
   "1x1": #{"1 / 1"},
@@ -285,7 +334,9 @@ $aspect-ratio-values: (
   "3x4": #{"3 / 4"},
 ) !default;
 
+// ------------------------------------------------------------
 // Object-fit
+// ------------------------------------------------------------
 $object-fit-values: (
   "contain": contain,
   "cover": cover,
@@ -294,7 +345,9 @@ $object-fit-values: (
   "none": none,
 ) !default;
 
+// ------------------------------------------------------------
 // Sizes
+// ------------------------------------------------------------
 $sizing-values: (
   "auto": auto,
   "fit-content": fit-content,

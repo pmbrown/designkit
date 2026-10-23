@@ -1,9 +1,6 @@
 // ------------------------------------------------------------
 // Colors 
 // ------------------------------------------------------------
-$custom-colors: () !default;
-$custom-color-modifiers: () !default;
-$custom-color-tables: () !default;
 
 // ------------------------------------------------------------
 // Color-scheme
@@ -38,6 +35,15 @@ $surface-colors: (
 // ------------------------------------------------------------
 // Primary colors
 // ------------------------------------------------------------
+$enable-primary-colors-tokens:      true !default;
+$enable-color-forms:                true !default;
+$enable-color-buttons:              true !default;
+$enable-color-tables:               true !default;
+$enable-color-backgrounds:          true !default;
+$enable-color-borders:              true !default; // border-color values only
+$enable-color-outlines:             true !default;
+$enable-color-texts:                true !default;
+
 $blue:              oklch(50% 0.25 250) !default;
 $green:             oklch(50% 0.22 160) !default;
 $red:               oklch(52% 0.25 26) !default;
@@ -53,6 +59,8 @@ $colors: (
   "yellow": $yellow,
   "gray": $gray,
 ) !default;
+
+$custom-colors: () !default;
 
 $color-mix:         lab !default;
 $middle-token:      5 !default;
@@ -96,3 +104,6 @@ $color-tables: (
   "yellow" var(--yellow-4) var(--yellow-5) var(--yellow-6),
   "gray" var(--gray-4) var(--gray-5) var(--gray-6),
 ) !default;
+
+$custom-color-modifiers: () !default;
+$custom-color-tables: () !default;
