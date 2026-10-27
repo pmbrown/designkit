@@ -91,6 +91,10 @@
   inline-size: 100%;
   max-inline-size: fit-content;
   
+  li * {
+    display: block;
+  }
+  
   &:not(ol, ul) :first-child:not(label), 
   &:not(ol, ul) :is(label:first-child + input),
   &:is(ol, ul) :first-child *  {

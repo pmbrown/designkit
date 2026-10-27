@@ -1,0 +1,28 @@
+// ------------------------------------------------------------
+// Function
+// ------------------------------------------------------------
+@use "sass:map";
+@use "sass:meta";
+
+// The defaults() function is Bootstrap v6 developers (brilliant) solution for
+// configuring Sass maps for compiling with overrides.
+// See their docs for an overview and source code to view the implementation:
+// - https://getbootstrap.com/docs/6.0/customize/sass/#compile-time-overrides
+// - https://github.com/twbs/bootstrap/blob/main/scss/_config.scss
+
+@function defaults($defaults, $overrides) {
+  @if meta.type-of($defaults) == "list" {
+    $map: ();
+    @each $key in $defaults {
+      $map: map.merge($map, ($key: true));
+    }
+    $defaults: $map;
+  }
+  $merged: map.merge($defaults, $overrides);
+  @each $key, $value in $merged {
+    @if $value == null {
+      $merged: map.remove($merged, $key);
+    }
+  }
+  @return $merged;
+}

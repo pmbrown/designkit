@@ -1,6 +1,7 @@
 // ------------------------------------------------------------
 // Colors 
 // ------------------------------------------------------------
+@use "functions" as *;
 
 // ------------------------------------------------------------
 // Color-scheme
@@ -9,11 +10,15 @@ $text-color:        light-dark(#000, #fff) !default;
 $canvas-color:      light-dark(#f1f2f4, #161a1d) !default;
 $link-color:        light-dark(#1c3db5, #9fbfdf) !default;
 
-$color-scheme: (
-  "text": $text-color,
-  "link": $link-color,
-  "canvas": $canvas-color,
-) !default;
+$color-scheme: () !default;
+$color-scheme: defaults(
+  (
+    "text": $text-color,
+    "link": $link-color,
+    "canvas": $canvas-color,
+  ),
+  $color-scheme
+);
 
 // ------------------------------------------------------------
 // Surface colors
@@ -24,13 +29,17 @@ $canvas-surface-3:   color-mix(in srgb, CanvasText 20%, var(--canvas)) !default;
 $canvas-surface-4:   color-mix(in srgb, CanvasText 30%, var(--canvas)) !default;
 $canvas-surface-5:   color-mix(in srgb, CanvasText 40%, var(--canvas)) !default;
 
-$surface-colors: (
-  "surf-1": $canvas-surface-1,
-  "surf-2": $canvas-surface-2,
-  "surf-3": $canvas-surface-3,
-  "surf-4": $canvas-surface-4,
-  "surf-5": $canvas-surface-5,
-) !default;
+$surface-colors: () !default;
+$surface-colors: defaults(
+  (
+    "surf-1": $canvas-surface-1,
+    "surf-2": $canvas-surface-2,
+    "surf-3": $canvas-surface-3,
+    "surf-4": $canvas-surface-4,
+    "surf-5": $canvas-surface-5,
+  ),
+  $surface-colors
+);
 
 // ------------------------------------------------------------
 // Primary colors
@@ -51,16 +60,18 @@ $cyan:              oklch(82% 0.18 185) !default;
 $yellow:            oklch(92% 0.20 99) !default;
 $gray:              oklch(80% 0.02 245) !default;
 
-$colors: (
-  "blue": $blue,
-  "green": $green,
-  "red": $red,
-  "cyan": $cyan,
-  "yellow": $yellow,
-  "gray": $gray,
-) !default;
-
-$custom-colors: () !default;
+$colors: () !default;
+$colors: defaults(
+  (
+    "blue": $blue,
+    "green": $green,
+    "red": $red,
+    "cyan": $cyan,
+    "yellow": $yellow,
+    "gray": $gray,
+  ),
+  $colors
+);
 
 $color-mix:         lab !default;
 $middle-token:      5 !default;
@@ -80,30 +91,53 @@ $darken-values: (
   "9": 45%,
 ) !default;
 
-// ------------------------------------------------------------
-// Modifiers
-// ------------------------------------------------------------
-// Forms and buttons
-// "name" | background | hover/focus | border/outline
-$color-modifiers: (
-  "blue" var(--blue-5) var(--blue-6) var(--blue-4),
-  "green" var(--green-5) var(--green-6) var(--green-4),   
-  "red" var(--red-5) var(--red-6) var(--red-4),
-  "cyan" var(--cyan-5) var(--cyan-4) var(--cyan-6),
-  "yellow" var(--yellow-5) var(--yellow-4) var(--yellow-6),
-  "gray" var(--gray-5) var(--gray-4) var(--gray-6),
+$theme-colors: () !default;
+$theme-colors: defaults(
+  (
+    "blue": (
+      "canvas": var(--blue-5),
+      "surf-1": var(--blue-5),
+      "surf-2": var(--blue-6),
+      "surf-3": var(--blue-4),
+    ),
+    "green": (
+      "canvas": var(--green-5),
+      "surf-1": var(--green-5),
+      "surf-2": var(--green-6),
+      "surf-3": var(--green-4),
+    ),
+    "red": (
+      "canvas": var(--red-5),
+      "surf-1": var(--red-5),
+      "surf-2": var(--red-6),
+      "surf-3": var(--red-4),
+    ),
+    "cyan": (
+      "canvas": var(--cyan-5),
+      "surf-1": var(--cyan-5),
+      "surf-2": var(--cyan-4),
+      "surf-3": var(--cyan-6),
+    ),
+    "yellow": (
+      "canvas": var(--yellow-5),
+      "surf-1": var(--yellow-5),
+      "surf-2": var(--yellow-4),
+      "surf-3": var(--yellow-6),
+    ),
+    "gray": (
+      "canvas": var(--gray-5),
+      "surf-1": var(--gray-5),
+      "surf-2": var(--gray-4),
+      "surf-3": var(--gray-6),
+    ),
+  ),
+  $theme-colors
+);
+
+$theme-reset: (
+  "canvas": var(--canvas),
+  "surf-1": var(--surf-1),
+  "surf-2": var(--surf-2),
+  "surf-3": var(--surf-3),
 ) !default;
 
-// Table color modifiers
-// "name" | background | thead | border
-$color-tables: (
-  "blue" var(--blue-5) var(--blue-6) var(--blue-4),
-  "green" var(--green-5) var(--green-6) var(--green-4), 
-  "red" var(--red-5) var(--red-6) var(--red-4),
-  "cyan" var(--cyan-4) var(--cyan-5) var(--cyan-6),
-  "yellow" var(--yellow-4) var(--yellow-5) var(--yellow-6),
-  "gray" var(--gray-4) var(--gray-5) var(--gray-6),
-) !default;
-
-$custom-color-modifiers: () !default;
-$custom-color-tables: () !default;

@@ -153,7 +153,6 @@
 // ------------------------------------------------------------
 // Surface color utilities
 // ------------------------------------------------------------
-
 @each $name, $color in $surface-colors {
   .bg-#{$name}, .bg-#{$name}-active:is(:hover, :focus-visible) {
     color: var(--fg, contrast-color(var(--#{$name})));
@@ -168,10 +167,29 @@
 }
 
 // ------------------------------------------------------------
+// Theme colors
+// ------------------------------------------------------------
+@if $enable-primary-colors-tokens {
+  @each $color-name, $color-map in $theme-colors {
+    .theme-#{$color-name} {
+      @each $token, $value in $color-map {
+        --#{$token}: #{$value};
+      }
+    }
+  }
+
+  .theme-reset {
+    @each $name, $value in $theme-reset {
+      --#{$name}: #{$value};
+    }
+  }
+}
+
+// ------------------------------------------------------------
 // Primary color utilities
 // ------------------------------------------------------------
-@if $enable-color-backgrounds {
-  @if $enable-primary-colors-tokens {
+@if $enable-primary-colors-tokens {
+  @if $enable-color-backgrounds {
     @each $name, $token in $colors {
       .bg-#{$name}, .bg-#{$name}-active:is(:hover, :focus-visible) {
         color: var(--fg, contrast-color(var(--#{$name})));
@@ -186,24 +204,8 @@
       }
     }
   }
-  
-  @each $name, $token in $custom-colors {
-    .bg-#{$name}, .bg-#{$name}-active:is(:hover, :focus-visible) {
-      color: var(--fg, contrast-color(var(--#{$name})));
-      background-color: var(--#{$name});
-    }
-    
-    @for $value from 1 through $color-utilities { 
-      .bg-#{$name}-#{$value}, .bg-#{$name}-#{$value}-active:is(:hover, :focus-visible) {
-        color: var(--fg, contrast-color(var(--#{$name}-#{$value})));
-        background-color: var(--#{$name}-#{$value});
-      }
-    }
-  }
-}
 
-@if $enable-color-borders {
-  @if $enable-primary-colors-tokens {
+  @if $enable-color-borders {
     @each $name, $token in $colors {
       .bd-#{$name}, .bd-#{$name}-active:is(:hover, :focus-visible) {
         border-color: var(--#{$name});
@@ -217,21 +219,7 @@
     }
   }
 
-  @each $name, $token in $custom-colors {
-    .bd-#{$name}, .bd-#{$name}-active:is(:hover, :focus-visible) {
-      border-color: var(--#{$name});
-    } 
-    
-    @for $value from 1 through $color-utilities { 
-      .bd-#{$name}-#{$value}, .bd-#{$name}-#{$value}-active:is(:hover, :focus-visible) {
-        border-color: var(--#{$name}-#{$value});
-      }    
-    }
-  }
-}
-
-@if $enable-color-outlines {
-  @if $enable-primary-colors-tokens {
+  @if $enable-color-outlines {
     @each $name, $token in $colors {
       .outline-#{$name}:focus, .outline-#{$name}:focus * {
         outline-color: var(--#{$name});
@@ -242,24 +230,10 @@
           outline-color: var(--#{$name}-#{$value});
         }    
       }
-    }  
-  }
-
-  @each $name, $token in $custom-colors {
-    .outline-#{$name}:focus, .outline-#{$name}:focus * {
-      outline-color: var(--#{$name});
-    } 
-    
-    @for $value from 1 through $color-utilities { 
-      .outline-#{$name}-#{$value}:focus, .outline-#{$name}-#{$value}:focus * {
-        outline-color: var(--#{$name}-#{$value});
-      }    
     }
   }
-}
 
-@if $enable-color-texts {
-  @if $enable-primary-colors-tokens {
+  @if $enable-color-texts {
     @each $name, $token in $colors {
       .fg-#{$name}, .fg-#{$name}-active:is(:hover, :focus-visible) {
         color: var(--#{$name});
@@ -270,80 +244,6 @@
           color: var(--#{$name}-#{$value});
         }    
       }
-    }
-  }
-
-  @each $name, $token in $custom-colors {
-    .fg-#{$name}, .fg-#{$name}-active:is(:hover, :focus-visible) {
-      color: var(--#{$name});
-    }    
-    
-    @for $value from 1 through $color-utilities { 
-      .fg-#{$name}-#{$value}, .fg-#{$name}-#{$value}-active:is(:hover, :focus-visible) {
-        color: var(--#{$name}-#{$value});
-      }    
-    }
-  }
-}
-
-
-// ------------------------------------------------------------
-// Primary color modifiers
-// ------------------------------------------------------------
-@if $enable-color-forms {
-  @if $enable-primary-colors-tokens {
-    @each $name, $background, $null, $border in $color-modifiers {
-      .form-#{$name} {
-        --form-bg: #{$background};
-        --form-bd-color: #{$border};
-      }
-    }
-  }
-
-  @each $name, $background, $null, $border in $custom-color-modifiers {
-    .form-#{$name} {
-      --form-bg: #{$background};
-      --form-bd-color: #{$border};
-    }
-  }
-}
-
-@if $enable-color-buttons {
-  @if $enable-primary-colors-tokens {
-    @each $name, $background, $hover, $border in $color-modifiers {
-      .btn-#{$name} {
-        --btn-bg: #{$background};
-        --btn-bg-hover: #{$hover};
-        --btn-bd-color: #{$border};
-      }
-    }
-  }
-  
-  @each $name, $background, $hover, $border in $custom-color-modifiers {
-    .btn-#{$name} {
-      --btn-bg: #{$background};
-      --btn-bg-hover: #{$hover};
-      --btn-bd-color: #{$border};
-    }
-  }
-}
-
-@if $enable-color-tables {
-  @if $enable-primary-colors-tokens {
-    @each $name, $background, $thead, $border in $color-tables {
-      .table-#{$name} {
-        --table-bg: #{$background};
-        --thead-bg: #{$thead};
-        --table-bd-color: #{$border};
-      }
-    }
-  }
-
-  @each $name, $background, $thead, $border in $custom-color-tables {
-    .table-#{$name} {
-      --table-bg: #{$background};
-      --thead-bg: #{$thead};
-      --table-bd-color: #{$border};
     }
   }
 }
@@ -372,51 +272,52 @@
 }
 
 // Flex
-@each $name, $prop, $value in $flex-utility-values {
-  .#{$name} {
-    #{$prop}: #{$value};
+@each $property, $property-map in $flex-values {
+  @each $utility, $value in $property-map {
+    .#{$utility} {
+      #{$property}: #{$value};
+    }
   }
 }
 
 // Grids
-.grid-columns, .grid-autofit,
-  [class*=grid-columns-], [class*=grid-autofit-] {
-  --rows: repeat(var(--gtr, 1), minmax(0, 1fr));
-  display: grid;
-  grid-template-rows: var(--rows);
-}
-
-@each $name, $prop, $value in $grid-utility-values {
-  .#{$name} {
-    #{$prop}: $value;
+.#{$grid-columns-class}, .#{$grid-autofit-class},
+[class*=#{$grid-columns-class}-], [class*=#{$grid-autofit-class}-] {
+  @each $name, $value in $grid-template-defaults {
+    #{$name}: #{$value};
   }
 }
 
-@for $value from 1 through $grid-column-values {
-  .g-#{$value} {
+@each $name, $value in $grid-template-values {
+  .#{$name} {
+    grid-template-columns: $value;
+  }
+}
+
+@for $value from 1 through $grid-columns {
+  .#{$grid-values-class}-#{$value} {
     --cols: #{$value};
   }
 }
-  
+
 // Grid layouts
 @if $enable-grid-layouts {
-  @each $class, $prop, $span in $grid-column-props {
-    @for $value from 1 through $grid-column-values {
+  @each $class, $prop, $span in $grid-layout-columns {
+    @for $value from 1 through $grid-columns {
       .#{$class}-#{$value} {
           #{$prop}: #{$span} $value;
       }
     }
   }
-      
-  @each $class, $prop, $span in $grid-row-props {
-    @for $value from 1 through $grid-row-values {
+     
+  @each $class, $prop, $span in $grid-layout-rows {
+    @for $value from 1 through $grid-rows {
       .#{$class}-#{$value} {
         #{$prop}: #{$span} $value;
       }
     }
-  }  
+  }
 }
-
 
 // Align
 @each $name, $value in $content-items-values {

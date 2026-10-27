@@ -1,4 +1,4 @@
-/*! DesignKit v0.3.0-alpha - Copyright (c) 2026 Phil Brown */
+/*! DesignKit v0.4.0-alpha - Copyright (c) 2026 Phil Brown */
 :where(html), :host {
   --font: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Noto Sans", "Liberation Sans", sans-serif;
   --text: light-dark(#000, #fff);
@@ -503,45 +503,28 @@
 }
 
 :where(table) {
-  color-scheme: var(--table-scheme, inherit);
   color: var(--table-fg, contrast-color(var(--table-bg, var(--canvas))));
   font-variant-numeric: tabular-nums;
   inline-size: 100%;
+  max-inline-size: var(--table-width);
   margin-block-end: var(--table-mb, 1rem);
   border-collapse: collapse;
   background-color: var(--table-bg, var(--canvas));
-  caption, th {
+  border-color: var(--table-bd-color, var(--surf-3));
+  th, td, caption {
     text-align: inherit;
-  }
-  caption {
-    color: var(--caption-fg, contrast-color(var(--caption-bg, var(--table-bg, var(--canvas)))));
-    font-size: var(--caption-fs, 0.938rem);
-    font-weight: var(--caption-fw);
-    padding-block: var(--table-py, 0.35rem);
-    padding-inline: var(--table-px, 0.75rem);
-    border: var(--table-bd-width, 1px) solid var(--table-bd-color, var(--surf-3));
-    border-block-end: none;
-    background-color: var(--caption-bg, var(--table-bg, var(--canvas)));
-  }
-  th {
-    color: var(--thead-fg, contrast-color(var(--thead-bg, var(--surf-1))));
-    font-size: var(--thead-fs, inherit);
-    font-weight: var(--thead-fw, revert);
-    background-color: var(--thead-bg, var(--surf-1));
-  }
-  thead, tbody, tfoot, tr, td, th {
     vertical-align: top;
-    border: var(--table-bd-width, 1px) solid var(--table-bd-color, var(--surf-3));
-  }
-  th, td {
+    border-width: var(--table-bd-width, 1px);
+    border-style: solid;
+    border-color: inherit;
     padding-block: var(--table-py, 0.4rem);
     padding-inline: var(--table-px, 0.75rem);
   }
-  :is(.table-striped tr, .table-combo tr):nth-child(even) {
-    background-color: var(--table-stripes, color-mix(in srgb, var(--thead-bg, var(--surf-1)), transparent 50%));
-  }
-  :is(.table-hover tbody tr, .table-combo tbody tr):hover {
-    background-color: var(--table-hover, color-mix(in srgb, var(--thead-bg, var(--surf-1)), transparent 20%));
+  caption {
+    color: inherit;
+    font-size: var(--caption-fs, var(--fs-2));
+    border-block-end: none;
+    background-color: inherit;
   }
 }
 
@@ -651,6 +634,9 @@
   flex-direction: column;
   inline-size: 100%;
   max-inline-size: fit-content;
+  li * {
+    display: block;
+  }
   &:not(ol, ul) :first-child:not(label),
   &:not(ol, ul) :is(label:first-child + input),
   &:is(ol, ul) :first-child * {
@@ -1391,6 +1377,55 @@
 
 .bd-surf-5, .bd-surf-5-active:is(:hover, :focus-visible) {
   border-color: var(--surf-5);
+}
+
+.theme-blue {
+  --canvas: var(--blue-5);
+  --surf-1: var(--blue-5);
+  --surf-2: var(--blue-6);
+  --surf-3: var(--blue-4);
+}
+
+.theme-green {
+  --canvas: var(--green-5);
+  --surf-1: var(--green-5);
+  --surf-2: var(--green-6);
+  --surf-3: var(--green-4);
+}
+
+.theme-red {
+  --canvas: var(--red-5);
+  --surf-1: var(--red-5);
+  --surf-2: var(--red-6);
+  --surf-3: var(--red-4);
+}
+
+.theme-cyan {
+  --canvas: var(--cyan-5);
+  --surf-1: var(--cyan-5);
+  --surf-2: var(--cyan-4);
+  --surf-3: var(--cyan-6);
+}
+
+.theme-yellow {
+  --canvas: var(--yellow-5);
+  --surf-1: var(--yellow-5);
+  --surf-2: var(--yellow-4);
+  --surf-3: var(--yellow-6);
+}
+
+.theme-gray {
+  --canvas: var(--gray-5);
+  --surf-1: var(--gray-5);
+  --surf-2: var(--gray-4);
+  --surf-3: var(--gray-6);
+}
+
+.theme-reset {
+  --canvas: var(--canvas);
+  --surf-1: var(--surf-1);
+  --surf-2: var(--surf-2);
+  --surf-3: var(--surf-3);
 }
 
 .bg-blue, .bg-blue-active:is(:hover, :focus-visible) {
@@ -2411,108 +2446,6 @@
 
 .fg-gray-9, .fg-gray-9-active:is(:hover, :focus-visible) {
   color: var(--gray-9);
-}
-
-.form-blue {
-  --form-bg: var(--blue-5);
-  --form-bd-color: var(--blue-4);
-}
-
-.form-green {
-  --form-bg: var(--green-5);
-  --form-bd-color: var(--green-4);
-}
-
-.form-red {
-  --form-bg: var(--red-5);
-  --form-bd-color: var(--red-4);
-}
-
-.form-cyan {
-  --form-bg: var(--cyan-5);
-  --form-bd-color: var(--cyan-6);
-}
-
-.form-yellow {
-  --form-bg: var(--yellow-5);
-  --form-bd-color: var(--yellow-6);
-}
-
-.form-gray {
-  --form-bg: var(--gray-5);
-  --form-bd-color: var(--gray-6);
-}
-
-.btn-blue {
-  --btn-bg: var(--blue-5);
-  --btn-bg-hover: var(--blue-6);
-  --btn-bd-color: var(--blue-4);
-}
-
-.btn-green {
-  --btn-bg: var(--green-5);
-  --btn-bg-hover: var(--green-6);
-  --btn-bd-color: var(--green-4);
-}
-
-.btn-red {
-  --btn-bg: var(--red-5);
-  --btn-bg-hover: var(--red-6);
-  --btn-bd-color: var(--red-4);
-}
-
-.btn-cyan {
-  --btn-bg: var(--cyan-5);
-  --btn-bg-hover: var(--cyan-4);
-  --btn-bd-color: var(--cyan-6);
-}
-
-.btn-yellow {
-  --btn-bg: var(--yellow-5);
-  --btn-bg-hover: var(--yellow-4);
-  --btn-bd-color: var(--yellow-6);
-}
-
-.btn-gray {
-  --btn-bg: var(--gray-5);
-  --btn-bg-hover: var(--gray-4);
-  --btn-bd-color: var(--gray-6);
-}
-
-.table-blue {
-  --table-bg: var(--blue-5);
-  --thead-bg: var(--blue-6);
-  --table-bd-color: var(--blue-4);
-}
-
-.table-green {
-  --table-bg: var(--green-5);
-  --thead-bg: var(--green-6);
-  --table-bd-color: var(--green-4);
-}
-
-.table-red {
-  --table-bg: var(--red-5);
-  --thead-bg: var(--red-6);
-  --table-bd-color: var(--red-4);
-}
-
-.table-cyan {
-  --table-bg: var(--cyan-4);
-  --thead-bg: var(--cyan-5);
-  --table-bd-color: var(--cyan-6);
-}
-
-.table-yellow {
-  --table-bg: var(--yellow-4);
-  --thead-bg: var(--yellow-5);
-  --table-bd-color: var(--yellow-6);
-}
-
-.table-gray {
-  --table-bg: var(--gray-4);
-  --thead-bg: var(--gray-5);
-  --table-bd-color: var(--gray-6);
 }
 
 .container,

@@ -125,43 +125,44 @@
       }
     }
     
-    // Flex
-    @each $name, $prop, $value in $flex-utility-values {
-      .#{$name}-#{$breakpoint} {
-        #{$prop}: #{$value};
+    // Flex   
+    @each $property, $property-map in $flex-values {
+      @each $utility, $value in $property-map {
+        .#{$utility}-#{$breakpoint} {
+          #{$property}: #{$value};
+        }
       }
     }
     
     // Grids
-    @each $name, $prop, $value in $grid-utility-values {
+    @each $name, $value in $grid-template-values {
       .#{$name}-#{$breakpoint} {
-        #{$prop}: $value;
+        grid-template-columns: $value;
       }
     }
-      
-    @for $value from 1 through $grid-column-values {
-      .g-#{$value}-#{$breakpoint} {
+    
+    @for $value from 1 through $grid-columns {
+      .#{$grid-values-class}-#{$value}-#{$breakpoint} {
         --cols: #{$value};
       }
     }
-      
-    // Grid layouts
+    
     @if $enable-grid-layouts {
-      @each $class, $prop, $span in $grid-column-props {
-        @for $value from 1 through $grid-column-values {
-          .#{$class}-#{$value}-#{$breakpoint} {
-            #{$prop}: #{$span} $value;
-          }
-        }
-      }
-          
-      @each $class, $prop, $span in $grid-row-props {
-        @for $value from 1 through $grid-row-values {
+      @each $class, $prop, $span in $grid-layout-columns {
+        @for $value from 1 through $grid-columns {
           .#{$class}-#{$value}-#{$breakpoint} {
               #{$prop}: #{$span} $value;
           }
         }
-      }      
+      }
+         
+      @each $class, $prop, $span in $grid-layout-rows {
+        @for $value from 1 through $grid-rows {
+          .#{$class}-#{$value}-#{$breakpoint} {
+            #{$prop}: #{$span} $value;
+          }
+        }
+      }    
     }
     
     // Align

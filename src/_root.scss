@@ -53,18 +53,4 @@
       }
     }
   }
-
-  @each $color, $value in $custom-colors {
-    --#{$color}: #{$value};
-    
-    @each $token, $percent in $lighten-values {
-      --#{$color}-#{$token}: color-mix(in #{$color-mix}, var(--#{$color}), #fff #{$percent});
-    }
-
-    --#{$color}-#{$middle-token}: var(--#{$color});
-
-    @each $token, $percent in $darken-values {
-      --#{$color}-#{$token}: color-mix(in #{$color-mix}, var(--#{$color}), #000 #{$percent});
-    }
-  }
 }

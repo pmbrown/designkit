@@ -415,52 +415,30 @@
 }
 
 :where(table) {
-  color-scheme: var(--table-scheme, inherit);
   color: var(--table-fg, contrast-color(var(--table-bg, var(--canvas))));
   font-variant-numeric: tabular-nums;
   inline-size: 100%;
+  max-inline-size: var(--table-width);
   margin-block-end: var(--table-mb, 1rem);
   border-collapse: collapse;
   background-color: var(--table-bg, var(--canvas));
+  border-color: var(--table-bd-color, var(--surf-3));
   
-  caption, th {
+  th, td, caption {
     text-align: inherit;
-  }
-  
-  caption {
-    color: var(--caption-fg, contrast-color(var(--caption-bg, var(--table-bg, var(--canvas)))));
-    font-size: var(--caption-fs, 0.938rem);
-    font-weight: var(--caption-fw);
-    padding-block: var(--table-py, 0.35rem);
-    padding-inline: var(--table-px, 0.75rem);
-    border: var(--table-bd-width, 1px) solid var(--table-bd-color, var(--surf-3));
-    border-block-end: none;
-    background-color: var(--caption-bg, var(--table-bg, var(--canvas)));
-  }
-  
-  th {
-    color: var(--thead-fg, contrast-color(var(--thead-bg, var(--surf-1))));
-    font-size: var(--thead-fs, inherit);
-    font-weight: var(--thead-fw, revert);
-    background-color: var(--thead-bg, var(--surf-1));
-  }
-  
-  thead, tbody, tfoot, tr, td, th {
     vertical-align: top;
-    border: var(--table-bd-width, 1px) solid var(--table-bd-color, var(--surf-3));
-  }
-  
-  th, td {
+    border-width: var(--table-bd-width, 1px);
+    border-style: solid;
+    border-color: inherit;  
     padding-block: var(--table-py, 0.4rem);
     padding-inline: var(--table-px, 0.75rem);
-  }
+  }  
   
-  :is(.table-striped tr, .table-combo tr):nth-child(even) {
-    background-color: var(--table-stripes, color-mix(in srgb, var(--thead-bg, var(--surf-1)), transparent 50%));
-  }
-  
-  :is(.table-hover tbody tr, .table-combo tbody tr):hover {
-    background-color: var(--table-hover, color-mix(in srgb, var(--thead-bg, var(--surf-1)), transparent 20%));
+  caption {
+    color: inherit;
+    font-size: var(--caption-fs, var(--fs-2));
+    border-block-end: none;
+    background-color: inherit;
   }
 }
 
