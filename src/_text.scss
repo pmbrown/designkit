@@ -1,0 +1,42 @@
+// ------------------------------------------------------------
+// Text
+// ------------------------------------------------------------
+@use "config" as *;
+
+.decoration-none, .decoration-none * {
+  text-decoration: none;
+}
+
+.vis-hidden, .vis-hidden-focus:not(:focus):not(:focus-within) {
+  position: absolute;
+  block-size: 1px;
+  inline-size: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@each $name, $value in $font-sizes {
+  .fs-#{$name} {
+    font-size: var(--fs-#{$name});
+  }
+}
+
+@each $name, $value in $line-heights {
+  .#{$name} {
+    line-height: var(--#{$name});
+  }
+}
+
+@each $name, $value in $font-weights {
+  .fw-#{$name} {
+    font-weight: var(--fw-#{$name});
+  }
+}
+
+@each $name, $prop, $value in $text-align-wrap {
+  .#{$name}, .#{$name} * {
+    #{$prop}: #{$value};
+  }
+}

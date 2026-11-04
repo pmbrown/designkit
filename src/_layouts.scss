@@ -1,0 +1,260 @@
+// ------------------------------------------------------------
+// Layouts
+// ------------------------------------------------------------
+@use "config" as *;
+
+// Containers
+.container,
+[class*=container-] {
+  inline-size: 100%;
+  max-inline-size: var(--container);
+}
+  
+@each $name, $value in $container-sizes {
+  .container-#{$name} {
+    --container: #{$value};
+  }
+}
+
+// Display
+@each $name, $value in $display-values {
+  .#{$name} {
+    display: #{$value};
+  }
+}
+
+// Flex
+@each $property, $property-map in $flex-values {
+  @each $utility, $value in $property-map {
+    .#{$utility} {
+      #{$property}: #{$value};
+    }
+  }
+}
+
+// Grids
+.#{$grid-columns-class}, .#{$grid-autofit-class},
+[class*=#{$grid-columns-class}-], [class*=#{$grid-autofit-class}-] {
+  @each $name, $value in $grid-template-defaults {
+    #{$name}: #{$value};
+  }
+}
+
+@each $name, $value in $grid-template-values {
+  .#{$name} {
+    grid-template-columns: $value;
+  }
+}
+
+@for $value from 1 through $grid-columns {
+  .#{$grid-values-class}-#{$value} {
+    --cols: #{$value};
+  }
+}
+
+// Grid layouts
+@if $enable-grid-layouts {
+  @each $class, $prop, $span in $grid-layout-columns {
+    @for $value from 1 through $grid-columns {
+      .#{$class}-#{$value} {
+          #{$prop}: #{$span} $value;
+      }
+    }
+  }
+     
+  @each $class, $prop, $span in $grid-layout-rows {
+    @for $value from 1 through $grid-rows {
+      .#{$class}-#{$value} {
+        #{$prop}: #{$span} $value;
+      }
+    }
+  }
+}
+
+// Align
+@each $name, $value in $content-items-values {
+  .align-items-#{$name} {
+    align-items: #{$value};
+  }
+}
+
+@each $name, $value in $content-space-values {
+  .align-content-#{$name} {
+    align-content: #{$value};
+  }
+}
+
+// Justify
+@each $name, $value in $content-items-values {
+  .justify-items-#{$name} {
+    justify-items: #{$value};
+  }
+}
+
+@each $name, $value in $content-space-values {
+  .justify-content-#{$name} {
+    justify-content: #{$value};
+  }
+}
+
+// Place
+@each $name, $value in $content-items-values {
+  .place-items-#{$name} {
+    place-items: #{$value};
+  }
+}
+  
+@each $name, $value in $content-space-values {
+  .place-content-#{$name} {
+    place-content: #{$value};
+  }
+}
+
+// Position
+@each $name, $value in $position-values {
+  .position-#{$name} {
+    position: #{$value};
+  }
+}
+
+// Inset
+@each $name, $prop in $inset-values {
+  .#{$name} {
+    #{$prop}: var(--#{$name}, 0);
+  }
+}
+
+@each $name, $prop in $inset-values {
+  .#{$name}-revert {
+    #{$prop}: revert;
+  }
+}
+
+// Z-index
+@each $name, $value in $zindex-values {
+  .#{$name} {
+    z-index: #{$value};
+  }
+}
+
+// Order
+@each $name, $value in $order-values {
+  .#{$name} {
+    order: #{$value};        
+  }
+}
+
+// Overflow
+@each $name, $value in $overflow-values {
+  @each $class, $prop in $overflow-props {
+    .#{$class}-#{$name} {
+      #{$prop}: #{$value};
+    }
+  }
+}
+
+// Overscroll
+@each $name, $value in $overscroll-values {
+  .#{$name} {
+    overscroll-behavior: #{$value};
+  }
+}
+
+// Scrollbars
+@each $name, $value in $scrollbar-widths {
+  .#{$name} {
+    scrollbar-width: #{$value};
+  }
+}
+  
+@each $name, $value in $scrollbar-gutter {
+  .#{$name} {
+    scrollbar-gutter: #{$value};
+  }
+}
+
+// Columns
+.columns {
+  columns: var(--cols);
+}
+
+@for $value from 1 through $column-values {
+  .columns-#{$value} {
+    columns: $value;
+  }
+}
+
+// Aspect-ratio
+.ratio, .ratio-group *:not(figcaption) {
+  aspect-ratio: var(--ratio);
+}
+
+@each $name, $value in $aspect-ratio-values {
+  .ratio-#{$name}, .ratio-group-#{$name} *:not(figcaption) {
+    aspect-ratio: $value;     
+  }
+}
+
+// Object-fit  
+@each $name, $value in $object-fit-values {
+  .object-fit-#{$name}, .object-fit-group-#{$name} * {
+    object-fit: $value;       
+  }
+}
+
+// Gaps
+@each $name, $value in $gap-values {
+  @each $class, $prop in $gap-props {
+    .#{$class}-#{$name} {
+      #{$prop}: var(--s-#{$name});        
+    }
+  }
+}
+
+// Margins
+@each $name, $value in $margin-values {
+  @each $class, $prop in $margin-props {
+    .#{$class}-#{$name} {
+      #{$prop}: var(--s-#{$name});        
+    }
+  }
+}
+
+// Padding
+@each $name, $value in $padding-values {
+  @each $class, $prop in $padding-props {
+    .#{$class}-#{$name} {
+      #{$prop}: var(--s-#{$name});        
+    }
+  }
+}
+
+// Heights
+@each $class, $prop in $height-props {
+  @each $name, $value in $height-values {
+    .#{$class}-#{$name} {
+      #{$prop}: #{$value};        
+    }
+  }
+}
+
+@each $name, $prop, $value in $variable-heights {
+  .#{$name} {
+    #{$prop}: #{$value};
+  }
+}
+
+// Widths
+@each $class, $prop in $width-props {
+  @each $name, $value in $width-values {  
+    .#{$class}-#{$name} {
+      #{$prop}: #{$value};        
+    }
+  }
+}
+
+@each $name, $prop, $value in $variable-widths {
+  .#{$name} {
+    #{$prop}: #{$value};
+  }
+}

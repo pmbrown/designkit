@@ -59,23 +59,16 @@ $enable-radius-breakpoints:         true !default;
 $enable-inner-radius:               true !default;
 $enable-inner-radius-breakpoints:   true !default;
 
-$rd-1:  0.188rem !default;
-$rd-2:  0.25rem !default;
-$rd-3:  0.375rem !default;
-$rd-4:  0.5rem !default;
-$rd-5:  0.75rem !default;
-$rd-6:  1rem !default;
-
 $border-radius-values: () !default;
 $border-radius-values: defaults(
   (
     "rd-0": 0,
-    "rd-1": $rd-1,
-    "rd-2": $rd-2,
-    "rd-3": $rd-3,
-    "rd-4": $rd-4,
-    "rd-5": $rd-5,
-    "rd-6": $rd-6,
+    "rd-1": 0.188rem,
+    "rd-2": 0.25rem,
+    "rd-3": 0.375rem,
+    "rd-4": 0.5rem,
+    "rd-5": 0.75rem,
+    "rd-6": 1rem,
   ),
   $border-radius-values
 );
@@ -185,31 +178,20 @@ $flex-values: defaults(
 // ------------------------------------------------------------
 // Gaps, margins, padding
 // ------------------------------------------------------------
-$space-1:   0.25rem !default;
-$space-2:   0.375rem !default;
-$space-3:   0.5rem !default;
-$space-4:   0.75rem !default;
-$space-5:   1rem !default;
-$space-6:   1.25rem !default;
-$space-7:   1.5rem !default;
-$space-8:   2rem !default;
-$space-9:   2.5rem !default;
-$space-10:  3rem !default;
-
 $spacing-values: () !default;
 $spacing-values: defaults(
   (
     "0": 0,
-    "1": $space-1,
-    "2": $space-2,
-    "3": $space-3,
-    "4": $space-4,
-    "5": $space-5,
-    "6": $space-6,
-    "7": $space-7,
-    "8": $space-8,
-    "9": $space-9,
-    "10": $space-10,
+    "1": 0.25rem,
+    "2": 0.375rem,
+    "3": 0.5rem,
+    "4": 0.75rem,
+    "5": 1rem,
+    "6": 1.25rem,
+    "7": 1.5rem,
+    "8": 2rem,
+    "9": 2.5rem,
+    "10": 3rem,
   ),
   $spacing-values
 );

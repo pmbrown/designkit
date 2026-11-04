@@ -1,0 +1,66 @@
+// ------------------------------------------------------------
+// Borders & radius
+// ------------------------------------------------------------
+@use "config" as *;
+
+@each $name, $prop in $border-props { 
+  .#{$name}-none {
+    #{$prop}: none;        
+  }
+}
+  
+@each $name, $prop in $border-props {
+  .#{$name} {
+    #{$prop}: $border-values;        
+  }
+}
+
+@each $name, $prop in $border-props {
+  @each $mod, $value in $border-widths {
+    .#{$name}-#{$mod} {
+      #{$prop}-width: $value;        
+    }    
+  } 
+}
+
+.rd {
+  border-radius: var(--rd);
+}
+
+@each $name, $value in $border-radius-values {
+  .#{$name} {
+    border-radius: var(--#{$name});
+  }
+}
+
+@each $name, $value in $border-radius-single-values {
+  .#{$name} {
+    border-radius: var(--#{$name});
+  }
+}
+  
+@each $name, $value in $border-radius-values {
+  @each $class, $start, $end in $radius-props {
+    .#{$name}-#{$class} {
+      #{$start}: var(--#{$name});
+      #{$end}: var(--#{$name});
+    }
+  }
+}
+
+@if $enable-inner-radius {
+  @each $name, $value in $border-radius-inner-values {
+    .#{$name}-inner {
+      border-radius: calc(var(--#{$name}) - #{$radius-sub-width});
+    }
+  }
+
+  @each $name, $value in $border-radius-inner-values {
+    @each $class, $start, $end in $radius-props {
+      .#{$name}-#{$class}-inner {
+        #{$start}: calc(var(--#{$name}) - #{$radius-sub-width});
+        #{$end}: calc(var(--#{$name}) - #{$radius-sub-width});
+      }
+    }
+  }
+}

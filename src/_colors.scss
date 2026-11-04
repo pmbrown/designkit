@@ -1,0 +1,162 @@
+// ------------------------------------------------------------
+// Colors
+// ------------------------------------------------------------
+@use "config" as *;
+
+.light, .light-active:is(:hover, :focus-visible) {
+  color-scheme: light;
+}
+
+.dark, .dark-active:is(:hover, :focus-visible) {
+  color-scheme: dark;
+}
+
+.fg-text, .fg-text * {
+  color: var(--text);
+}
+
+.fg-black, .fg-black * {
+  color: #000;
+}
+
+.fg-white, .fg-white * {
+  color: #fff;
+}
+
+.bg-page {
+  color: var(--fg, var(--text));
+  background-color: var(--canvas);
+}
+
+.bg-black {
+  color: var(--fg, #fff);
+  background-color: #000;
+}
+
+.bg-white {
+  color: var(--fg, #000);
+  background-color: #fff;
+}
+
+.fg, .fg * {
+  color: var(--fg);
+}
+
+.fg-active:is(:hover, :focus-visible) {
+  color: var(--fg-active);
+  * {
+    color: var(--fg-active);
+  }
+}
+
+.bg {
+  color: var(--fg, contrast-color(var(--bg)));
+  background-color: var(--bg);
+}
+
+.bg-active:is(:hover, :focus-visible) {
+  color: var(--fg-active, contrast-color(var(--bg-active)));
+  background-color: var(--bg-active);
+}
+
+.outline-color:focus {
+  outline-color: var(--outline);
+}
+
+// ------------------------------------------------------------
+// Surface color utilities
+// ------------------------------------------------------------
+@each $name, $color in $surface-colors {
+  .bg-#{$name}, .bg-#{$name}-active:is(:hover, :focus-visible) {
+    color: var(--fg, contrast-color(var(--#{$name})));
+    background-color: var(--#{$name});
+  }
+}
+
+@each $name, $color in $surface-colors {
+  .bd-#{$name}, .bd-#{$name}-active:is(:hover, :focus-visible) {
+    border-color: var(--#{$name});
+  }
+}
+
+// ------------------------------------------------------------
+// Theme colors
+// ------------------------------------------------------------
+@if $enable-color-tokens {
+  @each $color-name, $color-map in $theme-colors {
+    .#{$color-name} {
+      @each $token, $value in $color-map {
+        --#{$token}: #{$value};
+      }
+    }
+  }
+
+  .theme-reset {
+    @each $name, $value in $theme-reset {
+      --#{$name}: #{$value};
+    }
+  }
+}
+
+// ------------------------------------------------------------
+// Primary color utilities
+// ------------------------------------------------------------
+@if $enable-color-tokens {
+  @if $enable-color-backgrounds {
+    @each $name, $token in $colors {
+      .bg-#{$name}, .bg-#{$name}-active:is(:hover, :focus-visible) {
+        color: var(--fg, contrast-color(var(--#{$name})));
+        background-color: var(--#{$name});
+      }
+      
+      @for $value from 1 through $color-utilities { 
+        .bg-#{$name}-#{$value}, .bg-#{$name}-#{$value}-active:is(:hover, :focus-visible) {
+          color: var(--fg, contrast-color(var(--#{$name}-#{$value})));
+          background-color: var(--#{$name}-#{$value});
+        }
+      }
+    }
+  }
+
+  @if $enable-color-borders {
+    @each $name, $token in $colors {
+      .bd-#{$name}, .bd-#{$name}-active:is(:hover, :focus-visible) {
+        border-color: var(--#{$name});
+      } 
+      
+      @for $value from 1 through $color-utilities { 
+        .bd-#{$name}-#{$value}, .bd-#{$name}-#{$value}-active:is(:hover, :focus-visible) {
+          border-color: var(--#{$name}-#{$value});
+        }    
+      }
+    }
+  }
+
+  @if $enable-color-outlines {
+    @each $name, $token in $colors {
+      .outline-#{$name}:focus, .outline-#{$name}:focus * {
+        outline-color: var(--#{$name});
+      } 
+      
+      @for $value from 1 through $color-utilities { 
+        .outline-#{$name}-#{$value}:focus, .outline-#{$name}-#{$value}:focus * {
+          outline-color: var(--#{$name}-#{$value});
+        }    
+      }
+    }
+  }
+
+  @if $enable-color-texts {
+    @each $name, $token in $colors {
+      .fg-#{$name}, .fg-#{$name}-active:is(:hover, :focus-visible) {
+        color: var(--#{$name});
+      }    
+      
+      @for $value from 1 through $color-utilities { 
+        .fg-#{$name}-#{$value}, .fg-#{$name}-#{$value}-active:is(:hover, :focus-visible) {
+          color: var(--#{$name}-#{$value});
+        }    
+      }
+    }
+  }
+}

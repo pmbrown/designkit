@@ -1,4 +1,4 @@
-/*! DesignKit | Icons v1.0.0 - Copyright (c) 2026 Phil Brown */
+/*! DesignKit | Icons v1.1.0 - Copyright (c) 2026 Phil Brown */
 :where(html), :host {
   --ico-bars: url("data:image/svg+xml,<svg viewBox='0 0 16 16' fill='currentColor' xmlns='http://www.w3.org/2000/svg'><path d='m2 2v2h12v-2h-12zm0 5v2h12v-2h-12zm0 5v2h12v-2h-12z'/></svg>");
   --ico-dots-h: url("data:image/svg+xml,<svg viewBox='0 0 16 16' fill='currentColor' xmlns='http://www.w3.org/2000/svg'><path d='M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3'/></svg>");

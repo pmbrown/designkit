@@ -22,6 +22,10 @@
     --#{$name}: #{$value};
   }
 
+  @each $name, $value in $font-weights {
+    --fw-#{$name}: #{$value};
+  }
+
   @each $name, $value in $spacing-tokens {
     --s-#{$name}: #{$value};
   }
@@ -31,14 +35,14 @@
   }
 
   @each $name, $value in $custom-tokens {
-    --#{$name}: #{$value};
+    #{$name}: #{$value};
   }
 
   @each $name, $value in $surface-colors {
     --#{$name}: #{$value};
   }
 
-  @if $enable-primary-colors-tokens {
+  @if $enable-color-tokens {
     @each $color, $value in $colors {
       --#{$color}: #{$value};
       

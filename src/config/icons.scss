@@ -1,7 +1,8 @@
 // ----------------------------------------------------------
 // Icons
 // ----------------------------------------------------------
-$icons-version: '1.0.0';
+@use "functions" as *;
+$icons-version: '1.1.0';
 $custom-icons: () !default;
 $icon-colors: () !default;
 $icon-prefix: 'ico' !default;
@@ -29,7 +30,6 @@ $enable-box-icon-classes:           true !default;
 $enable-circle-icon-classes:        true !default;
 $enable-brand-icon-classes:         true !default;
 $enable-custom-icon-classes:        true !default;
-
 
 // ----------------------------------------------------------
 // Mixin for display utilities
@@ -67,26 +67,30 @@ $ext-link-ico:      url("data:image/svg+xml,<svg viewBox='0 0 16 16' fill='curre
 $pg-link-ico:       url("data:image/svg+xml,<svg viewBox='0 0 16 16' fill='currentColor' xmlns='http://www.w3.org/2000/svg'><path d='m2.5 2c-1.5 0-1.5 1.5-1.5 1.5v9c0 1.5 1.5 1.5 1.5 1.5h7.25c1.5 0 1.5-1.5 1.5-1.5v-1.99s0-0.5-0.5-0.5-0.5 0.5-0.5 0.5v1.99c0 0.5-0.5 0.5-0.5 0.5h-7.25c-0.5 0-0.5-0.5-0.5-0.5v-9c0-0.5 0.5-0.5 0.5-0.5h7.25c0.5 0 0.5 0.5 0.5 0.5v2.03s0 0.5 0.5 0.5 0.5-0.5 0.5-0.5v-2.03c0-1.5-1.5-1.5-1.5-1.5zm10 2.69c-0.384 0.0235-0.699 0.509-0.336 0.859l2.04 1.96h-10c-0.681-1.89e-4 -0.681 1 0 1l10-0.00195-2.01 2c-0.48 0.471 0.241 1.18 0.721 0.707l2.88-2.85c0.198-0.196 0.2-0.513 0-0.707l-2.91-2.82c-0.121-0.117-0.257-0.16-0.385-0.152z'/></svg>");
 $rss-ico:           url("data:image/svg+xml,<svg viewBox='0 0 16 16' fill='currentColor' xmlns='http://www.w3.org/2000/svg'><path d='M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm1.5 2.5c5.523 0 10 4.477 10 10a1 1 0 1 1-2 0 8 8 0 0 0-8-8 1 1 0 0 1 0-2zm0 4a6 6 0 0 1 6 6 1 1 0 1 1-2 0 4 4 0 0 0-4-4 1 1 0 0 1 0-2zm.5 7a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z'/></svg>");
 
-$standard-icons: (
-  "bars": $bars-ico,
-  "dots-h": $dots-h-ico,
-  "dots-v": $dots-v-ico,
-  "close": $close-ico,
-  "plus": $plus-ico,
-  "minus": $minus-ico,
-  "search": $search-ico,
-  "house": $house-ico,
-  "email": $email-ico,
-  "user": $user-ico,  
-  "download": $download-ico,
-  "image": $image-ico,
-  "image-fill": $image-fill-ico,
-  "folder": $folder-ico,
-  "file": $file-ico,
-  "ext-link": $ext-link-ico,
-  "pg-link": $pg-link-ico,
-  "rss": $rss-ico,
-) !default;
+$standard-icons: () !default;
+$standard-icons: defaults(
+  (
+    "bars": $bars-ico,
+    "dots-h": $dots-h-ico,
+    "dots-v": $dots-v-ico,
+    "close": $close-ico,
+    "plus": $plus-ico,
+    "minus": $minus-ico,
+    "search": $search-ico,
+    "house": $house-ico,
+    "email": $email-ico,
+    "user": $user-ico,  
+    "download": $download-ico,
+    "image": $image-ico,
+    "image-fill": $image-fill-ico,
+    "folder": $folder-ico,
+    "file": $file-ico,
+    "ext-link": $ext-link-ico,
+    "pg-link": $pg-link-ico,
+    "rss": $rss-ico,
+  ),
+  $standard-icons
+);
 
 // ----------------------------------------------------------
 // Color-scheme icons
@@ -94,10 +98,14 @@ $standard-icons: (
 $sun-ico:   url("data:image/svg+xml,<svg viewBox='0 0 16 16' fill='currentColor' xmlns='http://www.w3.org/2000/svg'><path d='m7.47 0v2.26h1.15v-2.26zm-4.9 2.19-0.812 0.8 1.62 1.6 0.812-0.8zm10.8 0-1.62 1.6 0.812 0.8 1.62-1.6zm-5.29 1.25s-4.59 0-4.59 4.52c0 4.52 4.59 4.52 4.59 4.52s4.59 0 4.59-4.52c0-4.52-4.59-4.52-4.59-4.52zm5.67 3.92v1.13h2.3v-1.13zm-13.7 0.0243v1.13h2.3v-1.13zm3.01 4-1.62 1.6 0.812 0.8 1.62-1.6zm9.99 0-0.812 0.8 1.62 1.6 0.812-0.8zm-5.54 2.36v2.26h1.15v-2.26z'/></svg>");
 $moon-ico:  url("data:image/svg+xml,<svg viewBox='0 0 16 16' fill='currentColor' xmlns='http://www.w3.org/2000/svg'><path d='m5.27 1c-0.533 0.0926-0.946 0.529-1.39 0.815-1.17 0.88-1.95 2.19-2.46 3.54-0.777 2.03-0.429 4.41 0.861 6.16 1.41 1.98 3.67 3.56 6.18 3.49 1.98-0.0388 3.86-0.991 5.28-2.33 0.48-0.565 0.971-1.16 1.27-1.84 0.089-0.435-0.481-0.742-0.809-0.456-1.61 0.937-3.67 1.22-5.37 0.365-1.52-0.764-2.79-2.04-3.55-3.55-0.871-1.73-0.56-3.83 0.411-5.45 0.187-0.304-0.0437-0.726-0.4-0.734z'/></svg>");
 
-$scheme-icons: ( 
-  "sun": $sun-ico,
-  "moon": $moon-ico,
-) !default;
+$scheme-icons: () !default;
+$scheme-icons: defaults(
+  (
+    "sun": $sun-ico,
+    "moon": $moon-ico,
+  ),
+  $scheme-icons
+);
 
 // ----------------------------------------------------------
 // Caret icons
@@ -111,16 +119,20 @@ $caret-up-sm-ico:     url("data:image/svg+xml,<svg viewBox='0 0 16 16' fill='cur
 $caret-left-sm-ico:   url("data:image/svg+xml,<svg viewBox='0 0 16 16' fill='currentColor' xmlns='http://www.w3.org/2000/svg'><path d='m6 8 4-4v8z'/></svg>");
 $caret-right-sm-ico:  url("data:image/svg+xml,<svg viewBox='0 0 16 16' fill='currentColor' xmlns='http://www.w3.org/2000/svg'><path d='m10 8-4 4-9e-7 -8z'/></svg>");
 
-$caret-icons: (
-  "caret-down": $caret-down-ico,
-  "caret-up": $caret-up-ico,
-  "caret-left": $caret-left-ico,
-  "caret-right": $caret-right-ico,
-  "caret-down-sm": $caret-down-sm-ico,
-  "caret-up-sm": $caret-up-sm-ico,
-  "caret-left-sm": $caret-left-sm-ico,
-  "caret-right-sm": $caret-right-sm-ico,
-) !default;
+$caret-icons: () !default;
+$caret-icons: defaults(
+  (
+    "caret-down": $caret-down-ico,
+    "caret-up": $caret-up-ico,
+    "caret-left": $caret-left-ico,
+    "caret-right": $caret-right-ico,
+    "caret-down-sm": $caret-down-sm-ico,
+    "caret-up-sm": $caret-up-sm-ico,
+    "caret-left-sm": $caret-left-sm-ico,
+    "caret-right-sm": $caret-right-sm-ico,
+  ),
+  $caret-icons
+);
 
 // ----------------------------------------------------------
 // Box icons
@@ -135,17 +147,21 @@ $info-box-fill-ico:       url("data:image/svg+xml,<svg viewBox='0 0 16 16' fill=
 $question-box-ico:        url("data:image/svg+xml,<svg viewBox='0 0 16 16' fill='currentColor' xmlns='http://www.w3.org/2000/svg'><path d='m2 0c-2 0-2 2-2 2v12c0 2 2 2 2 2h12c2 0 2-2 2-2v-12c0-2-2-2-2-2h-12zm0 1h12s1 0 1 1v12s0 1-1 1h-12s-1 0-1-1v-12s0-1 1-1zm5.77 3.23c-0.236 0.0222-0.467 0.0688-0.689 0.139-0.829 0.278-1.56 1.03-1.58 1.94 0.00286 0.517 0.675 0.823 1.06 0.482 0.287-0.281 0.288-0.727 0.531-1.04 0.237-0.436 0.789-0.538 1.24-0.449 0.537 0.0854 0.95 0.691 0.732 1.21-0.225 0.482-0.713 0.754-1.07 1.13-0.412 0.356-0.727 0.859-0.727 1.42-0.0546 0.354 0.156 0.766 0.549 0.777 0.382 0.069 0.673-0.273 0.686-0.631 0.0437-0.331 0.227-0.624 0.479-0.838 0.421-0.413 0.924-0.754 1.25-1.25 0.509-0.745 0.248-1.83-0.457-2.36-0.566-0.436-1.3-0.594-2.01-0.527zm0.285 6.07c-0.454-0.0865-0.921 0.314-0.873 0.781-0.0118 0.403 0.367 0.724 0.758 0.705 0.298 0.00425 0.606-0.185 0.703-0.473 0.164-0.426-0.118-0.966-0.588-1.01z'/></svg>");
 $question-box-fill-ico:   url("data:image/svg+xml,<svg viewBox='0 0 16 16' fill='currentColor' xmlns='http://www.w3.org/2000/svg'><path d='m2 0c-2 0-2 2-2 2v12c0 2 2 2 2 2h12c2 0 2-2 2-2v-12c0-2-2-2-2-2h-12zm5.77 4.23c0.707-0.0665 1.44 0.0911 2.01 0.527 0.705 0.526 0.966 1.61 0.457 2.36-0.326 0.5-0.829 0.841-1.25 1.25-0.252 0.214-0.435 0.507-0.479 0.838-0.013 0.358-0.303 0.7-0.686 0.631-0.392-0.011-0.603-0.424-0.549-0.777-8.55e-4 -0.559 0.314-1.06 0.727-1.42 0.357-0.373 0.845-0.645 1.07-1.13 0.217-0.522-0.195-1.13-0.732-1.21-0.451-0.0893-1 0.013-1.24 0.449-0.243 0.314-0.244 0.76-0.531 1.04-0.389 0.34-1.06 0.0343-1.06-0.482 0.0202-0.908 0.751-1.66 1.58-1.94 0.222-0.0699 0.454-0.116 0.689-0.139zm0.285 6.07c0.47 0.048 0.752 0.587 0.588 1.01-0.0975 0.288-0.405 0.477-0.703 0.473-0.391 0.0186-0.77-0.302-0.758-0.705-0.048-0.467 0.419-0.868 0.873-0.781z'/></svg>");
 
-$box-icons: (   
-  "box": $box-ico,
-  "close-box": $close-box-ico,
-  "close-box-fill": $close-box-fill-ico,
-  "pen-box": $pen-box-ico,
-  "tick-box": $tick-box-ico,
-  "info-box": $info-box-ico,
-  "info-box-fill": $info-box-fill-ico,
-  "question-box": $question-box-ico,
-  "question-box-fill": $question-box-fill-ico,
-) !default;
+$box-icons: () !default;
+$box-icons: defaults(
+  (
+    "box": $box-ico,
+    "close-box": $close-box-ico,
+    "close-box-fill": $close-box-fill-ico,
+    "pen-box": $pen-box-ico,
+    "tick-box": $tick-box-ico,
+    "info-box": $info-box-ico,
+    "info-box-fill": $info-box-fill-ico,
+    "question-box": $question-box-ico,
+    "question-box-fill": $question-box-fill-ico,
+  ),
+  $box-icons
+);
 
 // ----------------------------------------------------------
 // Circle icons
@@ -163,20 +179,24 @@ $info-circle-fill-ico:      url("data:image/svg+xml,<svg viewBox='0 0 16 16' fil
 $question-circle-ico:       url("data:image/svg+xml,<svg viewBox='0 0 16 16' fill='currentColor' xmlns='http://www.w3.org/2000/svg'><path d='m8 0c-8 0-8 8-8 8s0 8 8 8 8-8 8-8 0-8-8-8zm0 1c7 0 7 7 7 7s0 7-7 7-7-7-7-7 0-7 7-7zm-0.23 3.23c-0.236 0.0222-0.467 0.0688-0.689 0.139-0.829 0.278-1.56 1.03-1.58 1.94 0.00286 0.517 0.675 0.823 1.06 0.482 0.287-0.281 0.288-0.727 0.531-1.04 0.237-0.436 0.789-0.538 1.24-0.449 0.537 0.0854 0.95 0.691 0.732 1.21-0.225 0.482-0.713 0.754-1.07 1.13-0.412 0.356-0.727 0.859-0.727 1.42-0.0546 0.354 0.156 0.766 0.549 0.777 0.382 0.069 0.673-0.273 0.686-0.631 0.0437-0.331 0.227-0.624 0.479-0.838 0.421-0.413 0.924-0.754 1.25-1.25 0.509-0.745 0.248-1.83-0.457-2.36-0.566-0.436-1.3-0.594-2.01-0.527zm0.285 6.07c-0.454-0.0865-0.921 0.314-0.873 0.781-0.0118 0.403 0.367 0.724 0.758 0.705 0.298 0.00425 0.606-0.185 0.703-0.473 0.164-0.426-0.118-0.966-0.588-1.01z'/></svg>");
 $question-circle-fill-ico:  url("data:image/svg+xml,<svg viewBox='0 0 16 16' fill='currentColor' xmlns='http://www.w3.org/2000/svg'><path d='m8 0c-8 0-8 8-8 8s0 8 8 8 8-8 8-8 0-8-8-8zm-0.23 4.23c0.707-0.0665 1.44 0.0911 2.01 0.527 0.705 0.526 0.966 1.61 0.457 2.36-0.326 0.5-0.829 0.841-1.25 1.25-0.252 0.214-0.435 0.507-0.479 0.838-0.013 0.358-0.303 0.7-0.686 0.631-0.392-0.011-0.603-0.424-0.549-0.777-8.55e-4 -0.559 0.314-1.06 0.727-1.42 0.357-0.373 0.845-0.645 1.07-1.13 0.217-0.522-0.195-1.13-0.732-1.21-0.451-0.0893-1 0.013-1.24 0.449-0.243 0.314-0.244 0.76-0.531 1.04-0.389 0.34-1.06 0.0343-1.06-0.482 0.0202-0.908 0.751-1.66 1.58-1.94 0.222-0.0699 0.454-0.116 0.689-0.139zm0.285 6.07c0.47 0.048 0.752 0.587 0.588 1.01-0.0975 0.288-0.405 0.477-0.703 0.473-0.391 0.0186-0.77-0.302-0.758-0.705-0.048-0.467 0.419-0.868 0.873-0.781z'/></svg>");
 
-$circle-icons: (
-  "circle": $circle-ico,
-  "circle-sm": $circle-sm-ico,
-  "circle-fill": $circle-fill-ico,
-  "circle-fill-sm": $circle-fill-sm-ico,
-  "circle-inner": $circle-inner-ico,
-  "circle-inner-sm": $circle-inner-sm-ico,
-  "circle-half": $circle-half-ico,
-  "circle-half-sm": $circle-half-sm-ico,
-  "info-circle": $info-circle-ico,
-  "info-circle-fill": $info-circle-fill-ico,
-  "question-circle": $question-circle-ico,
-  "question-circle-fill": $question-circle-fill-ico,
-) !default;
+$circle-icons: () !default;
+$circle-icons: defaults(
+  (
+    "circle": $circle-ico,
+    "circle-sm": $circle-sm-ico,
+    "circle-fill": $circle-fill-ico,
+    "circle-fill-sm": $circle-fill-sm-ico,
+    "circle-inner": $circle-inner-ico,
+    "circle-inner-sm": $circle-inner-sm-ico,
+    "circle-half": $circle-half-ico,
+    "circle-half-sm": $circle-half-sm-ico,
+    "info-circle": $info-circle-ico,
+    "info-circle-fill": $info-circle-fill-ico,
+    "question-circle": $question-circle-ico,
+    "question-circle-fill": $question-circle-fill-ico,
+  ),
+  $circle-icons
+);
 
 // ----------------------------------------------------------
 // Brand icons
@@ -195,18 +215,22 @@ $sass-ico:        url("data:image/svg+xml,<svg viewBox='0 0 16 16' fill='current
 $codepen-ico:     url("data:image/svg+xml,<svg viewBox='0 0 512 512' fill='currentColor' xmlns='http://www.w3.org/2000/svg'><path d='M502.285 159.704l-234-156c-7.987-4.915-16.511-4.96-24.571 0l-234 156C3.714 163.703 0 170.847 0 177.989v155.999c0 7.143 3.714 14.286 9.715 18.286l234 156.022c7.987 4.915 16.511 4.96 24.571 0l234-156.022c6-3.999 9.715-11.143 9.715-18.286V177.989c-.001-7.142-3.715-14.286-9.716-18.285zM278 63.131l172.286 114.858-76.857 51.429L278 165.703V63.131zm-44 0v102.572l-95.429 63.715-76.857-51.429L234 63.131zM44 219.132l55.143 36.857L44 292.846v-73.714zm190 229.715L61.714 333.989l76.857-51.429L234 346.275v102.572zm22-140.858l-77.715-52 77.715-52 77.715 52-77.715 52zm22 140.858V346.275l95.429-63.715 76.857 51.429L278 448.847zm190-156.001l-55.143-36.857L468 219.132v73.714z'/></svg>");  
 $js-ico:          url("data:image/svg+xml,<svg viewBox='0 0 16 16' fill='currentColor' xmlns='http://www.w3.org/2000/svg'><path d='M14 0a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2zM9.053 7.596v3.127l-.007 1.752q0 .498-.186.752t-.556.263q-.342 0-.528-.234-.185-.234-.185-.684v-.175H6.37v.185q0 .665.253 1.113.255.45.703.674.44.225 1.016.225.88 0 1.406-.498.527-.498.527-1.485l.007-1.752V7.596zm3.808-.108q-.585 0-1.006.244a1.67 1.67 0 0 0-.634.674 2.1 2.1 0 0 0-.225.996q0 .753.293 1.182.303.42.967.732l.469.215q.438.186.625.43.185.244.185.635 0 .478-.166.703-.156.224-.527.224-.361.001-.547-.244-.186-.243-.205-.752h-1.162q.02.996.498 1.524.479.527 1.386.527.909 0 1.417-.518.507-.517.507-1.484 0-.81-.332-1.289t-1.045-.79l-.449-.196q-.39-.166-.556-.381-.166-.214-.166-.576 0-.4.165-.596.177-.195.508-.195.361 0 .508.234.156.234.176.703h1.123q-.03-.976-.498-1.484-.47-.518-1.309-.518'/></svg>");
 
-$brand-icons: (
-  "x": $x-ico,
-  "tiktok": $tiktok-ico,
-  "facebook": $facebook-ico,
-  "instagram": $instagram-ico,
-  "pinterest": $pinterest-ico,
-  "reddit": $reddit-ico,
-  "youtube": $youtube-ico,
-  "mastodon": $mastodon-ico,
-  "github": $github-ico,
-  "codepen": $codepen-ico,
-  "css": $css-ico,
-  "sass": $sass-ico,
-  "js": $js-ico,
-) !default;
+$brand-icons: () !default;
+$brand-icons: defaults(
+  (
+    "x": $x-ico,
+    "tiktok": $tiktok-ico,
+    "facebook": $facebook-ico,
+    "instagram": $instagram-ico,
+    "pinterest": $pinterest-ico,
+    "reddit": $reddit-ico,
+    "youtube": $youtube-ico,
+    "mastodon": $mastodon-ico,
+    "github": $github-ico,
+    "codepen": $codepen-ico,
+    "css": $css-ico,
+    "sass": $sass-ico,
+    "js": $js-ico,
+  ),
+  $brand-icons
+);

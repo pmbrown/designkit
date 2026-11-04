@@ -1,8 +1,14 @@
 // ------------------------------------------------------------
 // DesignKit
 // ------------------------------------------------------------
+@forward "config";
 @forward "root";
-@forward "styles";
-@forward "helpers";
-@forward "utilities";
+@forward "resets";
+@forward "text";
+@forward "lists";
+@forward "inputs";
+@forward "boxes";
+@forward "borders";
+@forward "colors";
+@forward "layouts";
 @forward "breakpoints";
