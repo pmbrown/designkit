@@ -22,17 +22,29 @@
       text-decoration: none;
     }
     
+    .fs-v-#{$breakpoint} {
+      font-size: var(--fs-v-#{$breakpoint});
+    }
+        
     @each $name, $value in $font-sizes {
       .fs-#{$name}-#{$breakpoint} {
         font-size: #{$value};
       }
     }
     
+    .lh-v-#{$breakpoint} {
+      line-height: var(--lh-v-#{$breakpoint});
+    }
+    
     @each $name, $value in $line-heights {
-      .#{$name}-#{$breakpoint} {
-        line-height: #{$value};
+      .lh-#{$name}-#{$breakpoint} {
+        line-height: var(--lh-#{$name});
       }
     }
+
+  .fw-v-#{$breakpoint} {
+    font-weight: var(--fw-v-#{$breakpoint});
+  }
 
     @each $name, $value in $font-weights {
       .fw-#{$name}-#{$breakpoint} {
@@ -41,8 +53,8 @@
     }
 
     @each $name, $prop, $value in $text-align-wrap {
-      .#{$name}-#{$breakpoint}, .#{$name}-#{$breakpoint} * {
-        #{$prop}: #{$value};
+      .text-#{$name}-#{$breakpoint}, .text-#{$name}-#{$breakpoint} * {
+        text-#{$prop}: #{$name};
       }
     }
       
@@ -104,15 +116,15 @@
     @if $enable-inner-radius-breakpoints {
       @each $name, $value in $border-radius-inner-values {
         .#{$name}-inner-#{$breakpoint} {
-          border-radius: calc(var(--#{$name}) - #{$radius-sub-width});
+          border-radius: calc(var(--#{$name}) - #{$border-radius-inner-width});
         }
       }
     
       @each $name, $value in $border-radius-inner-values {
         @each $class, $start, $end in $radius-props {
           .#{$name}-#{$class}-inner-#{$breakpoint} {
-            #{$start}: calc(var(--#{$name}) - #{$radius-sub-width});
-            #{$end}: calc(var(--#{$name}) - #{$radius-sub-width});
+            #{$start}: calc(var(--#{$name}) - #{$border-radius-inner-width});
+            #{$end}: calc(var(--#{$name}) - #{$border-radius-inner-width});
           }
         }
       }
@@ -269,7 +281,7 @@
 
     // Columns
     .columns-#{$breakpoint} {
-      columns: var(--cols);
+      columns: var(--columns-#{$breakpoint});
     }
     
     @for $value from 1 through $column-values {

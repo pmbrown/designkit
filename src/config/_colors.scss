@@ -6,16 +6,12 @@
 // ------------------------------------------------------------
 // Color-scheme
 // ------------------------------------------------------------
-$text-color:        light-dark(#000, #fff) !default;
-$canvas-color:      light-dark(#f1f2f4, #161a1d) !default;
-$link-color:        light-dark(#1c3db5, #9fbfdf) !default;
-
 $color-scheme: () !default;
 $color-scheme: defaults(
   (
-    "text": $text-color,
-    "link": $link-color,
-    "canvas": $canvas-color,
+    "text": light-dark(#000, #fff),
+    "canvas": light-dark(#f1f2f4, #161a1d),
+    "link": light-dark(#1c3db5, #9fbfdf),
   ),
   $color-scheme
 );
@@ -23,20 +19,14 @@ $color-scheme: defaults(
 // ------------------------------------------------------------
 // Surface colors
 // ------------------------------------------------------------
-$canvas-surface-1:   color-mix(in srgb, CanvasText 5%, var(--canvas)) !default;
-$canvas-surface-2:   color-mix(in srgb, CanvasText 10%, var(--canvas)) !default;
-$canvas-surface-3:   color-mix(in srgb, CanvasText 20%, var(--canvas)) !default;
-$canvas-surface-4:   color-mix(in srgb, CanvasText 30%, var(--canvas)) !default;
-$canvas-surface-5:   color-mix(in srgb, CanvasText 40%, var(--canvas)) !default;
-
 $surface-colors: () !default;
 $surface-colors: defaults(
   (
-    "surf-1": $canvas-surface-1,
-    "surf-2": $canvas-surface-2,
-    "surf-3": $canvas-surface-3,
-    "surf-4": $canvas-surface-4,
-    "surf-5": $canvas-surface-5,
+    "surf-1": color-mix(in srgb, CanvasText 5%, var(--canvas)),
+    "surf-2": color-mix(in srgb, CanvasText 10%, var(--canvas)),
+    "surf-3": color-mix(in srgb, CanvasText 20%, var(--canvas)),
+    "surf-4": color-mix(in srgb, CanvasText 30%, var(--canvas)),
+    "surf-5": color-mix(in srgb, CanvasText 40%, var(--canvas)),
   ),
   $surface-colors
 );
@@ -50,22 +40,15 @@ $enable-color-borders:      true !default;
 $enable-color-outlines:     true !default;
 $enable-color-texts:        true !default;
 
-$blue:    oklch(50% 0.25 250) !default;
-$green:   oklch(50% 0.22 160) !default;
-$red:     oklch(52% 0.25 26) !default;
-$cyan:    oklch(82% 0.18 185) !default;
-$yellow:  oklch(92% 0.20 99) !default;
-$gray:    oklch(80% 0.02 245) !default;
-
 $colors: () !default;
 $colors: defaults(
   (
-    "blue": $blue,
-    "green": $green,
-    "red": $red,
-    "cyan": $cyan,
-    "yellow": $yellow,
-    "gray": $gray,
+    "blue": oklch(50% 0.25 250),
+    "green": oklch(50% 0.22 160),
+    "red": oklch(52% 0.25 26),
+    "cyan": oklch(82% 0.18 185),
+    "yellow": oklch(92% 0.20 99),
+    "gray": oklch(80% 0.02 245),
   ),
   $colors
 );
@@ -74,19 +57,27 @@ $color-mix:         lab !default;
 $middle-token:      5 !default;
 $color-utilities:   9 !default;
 
-$lighten-values: (
-  "1": 70%,
-  "2": 55%,
-  "3": 40%,
-  "4": 20%,
-) !default;
+$lighten-values: () !default;
+$lighten-values: defaults(
+  (
+    "1": 70%,
+    "2": 55%,
+    "3": 40%,
+    "4": 20%,
+  ),
+  $lighten-values
+);
 
-$darken-values: (
-  "6": 12%,
-  "7": 25%,
-  "8": 37%,
-  "9": 45%,
-) !default;
+$darken-values: () !default;
+$darken-values: defaults(
+  (
+    "6": 12%,
+    "7": 25%,
+    "8": 37%,
+    "9": 45%,
+  ),
+  $darken-values
+);
 
 // ------------------------------------------------------------
 // Theme colors

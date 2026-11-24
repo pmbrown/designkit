@@ -42,11 +42,9 @@
   color: var(--fg);
 }
 
-.fg-active:is(:hover, :focus-visible) {
+.fg-active:is(:hover, :focus-visible),
+.fg-active:is(:hover, :focus-visible) * {
   color: var(--fg-active);
-  * {
-    color: var(--fg-active);
-  }
 }
 
 .bg {

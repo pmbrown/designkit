@@ -51,15 +51,15 @@
 @if $enable-inner-radius {
   @each $name, $value in $border-radius-inner-values {
     .#{$name}-inner {
-      border-radius: calc(var(--#{$name}) - #{$radius-sub-width});
+      border-radius: calc(var(--#{$name}) - #{$border-radius-inner-width});
     }
   }
 
   @each $name, $value in $border-radius-inner-values {
     @each $class, $start, $end in $radius-props {
       .#{$name}-#{$class}-inner {
-        #{$start}: calc(var(--#{$name}) - #{$radius-sub-width});
-        #{$end}: calc(var(--#{$name}) - #{$radius-sub-width});
+        #{$start}: calc(var(--#{$name}) - #{$border-radius-inner-width});
+        #{$end}: calc(var(--#{$name}) - #{$border-radius-inner-width});
       }
     }
   }

@@ -17,16 +17,28 @@
   white-space: nowrap;
 }
 
+.fs-v {
+  font-size: var(--fs-v);
+}
+
 @each $name, $value in $font-sizes {
   .fs-#{$name} {
     font-size: var(--fs-#{$name});
   }
 }
 
+.lh-v {
+  line-height: var(--lh-v);
+}
+
 @each $name, $value in $line-heights {
-  .#{$name} {
-    line-height: var(--#{$name});
+  .lh-#{$name} {
+    line-height: var(--lh-#{$name});
   }
+}
+
+.fw-v {
+  font-weight: var(--fw-v);
 }
 
 @each $name, $value in $font-weights {
@@ -36,7 +48,7 @@
 }
 
 @each $name, $prop, $value in $text-align-wrap {
-  .#{$name}, .#{$name} * {
-    #{$prop}: #{$value};
+  .text-#{$name}, .text-#{$name} * {
+    text-#{$prop}: #{$name};
   }
 }

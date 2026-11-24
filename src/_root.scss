@@ -19,14 +19,14 @@
   }
 
   @each $name, $value in $line-heights {
-    --#{$name}: #{$value};
+    --lh-#{$name}: #{$value};
   }
 
   @each $name, $value in $font-weights {
     --fw-#{$name}: #{$value};
   }
 
-  @each $name, $value in $spacing-tokens {
+  @each $name, $value in $spacing-values {
     --s-#{$name}: #{$value};
   }
 

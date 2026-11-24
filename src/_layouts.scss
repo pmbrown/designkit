@@ -175,7 +175,7 @@
 
 // Columns
 .columns {
-  columns: var(--cols);
+  columns: var(--columns);
 }
 
 @for $value from 1 through $column-values {

@@ -5,12 +5,12 @@
 @use "functions" as *;
 
 // ------------------------------------------------------------
-// Breakpoints & containers
+// Breakpoints and containers
 // ------------------------------------------------------------
-$media-query:     'width <' !default;
+$media-query: 'width <' !default;
 
 $breakpoint-sizes: (
-  "xl": 1536px,
+  "xl": 1366px,
   "lg": 1280px,
   "md": 1024px,
   "sm": 768px,
@@ -20,10 +20,13 @@ $breakpoint-sizes: (
 $container-sizes:  $breakpoint-sizes !default;
 
 // ------------------------------------------------------------
-// Borders
+// Borders and radius
 // ------------------------------------------------------------
 $enable-borders-breakpoints:        true !default;
 $enable-border-widths-breakpoints:  true !default;
+$enable-radius-breakpoints:         true !default;
+$enable-inner-radius:               true !default;
+$enable-inner-radius-breakpoints:   true !default;
 
 $border-width:    var(--bd-width, 1px) !default;
 $border-color:    var(--bd-color, var(--surf-3)) !default;
@@ -51,13 +54,6 @@ $border-widths: defaults(
   ),
   $border-widths
 );
-
-// ------------------------------------------------------------
-// Radius
-// ------------------------------------------------------------
-$enable-radius-breakpoints:         true !default;
-$enable-inner-radius:               true !default;
-$enable-inner-radius-breakpoints:   true !default;
 
 $border-radius-values: () !default;
 $border-radius-values: defaults(
@@ -87,8 +83,8 @@ $radius-props: (
   "e" border-start-end-radius border-end-end-radius,
 ) !default;
 
-$border-radius-inner-values: map.remove($border-radius-values, "rd-0") !default;
-$radius-sub-width: 'var(--bd-width, 1px)' !default;
+$border-radius-inner-values:  map.remove($border-radius-values, "rd-0") !default;
+$border-radius-inner-width:   $border-width !default;
 
 // ------------------------------------------------------------
 // Grids
@@ -192,14 +188,14 @@ $spacing-values: defaults(
     "8": 2rem,
     "9": 2.5rem,
     "10": 3rem,
+    "auto": auto,
   ),
   $spacing-values
 );
 
-$spacing-tokens:  map.set($spacing-values, "auto", auto) !default;
-$gap-values:      $spacing-values !default;
-$padding-values:  $spacing-values !default;
-$margin-values:   map.set($spacing-values, "auto", auto) !default;
+$gap-values:      map.remove($spacing-values, "auto") !default;
+$padding-values:  map.remove($spacing-values, "auto") !default;
+$margin-values:   $spacing-values !default;
 
 $gap-props: (
   "gap": gap,
@@ -259,7 +255,6 @@ $position-values: defaults(
   $position-values
 );
 
-
 // ------------------------------------------------------------
 // Inset - '0' default variable, i.e `var(--inset-top, 0)`
 // ------------------------------------------------------------
@@ -292,6 +287,7 @@ $zindex-values: defaults(
   ),
   $zindex-values
 );
+
 // ------------------------------------------------------------
 // Order
 // ------------------------------------------------------------
